@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from "react";
-import { getStudents } from "../src/services/apiStudents";
 import { Student } from "@/src/types/student";
+import { getStudents } from "@/src/lib/api/students";
 
 export default function HomePage() {
   const [students, setStudents] = useState<Student[]>([]);
