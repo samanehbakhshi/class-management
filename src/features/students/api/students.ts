@@ -1,5 +1,5 @@
 import { Student } from "@/src/types/student";
-import supabase from "../../services/supabaseClient";
+import supabase from "../../../lib/services/supabaseClient";
 
 export async function getStudents(): Promise<Student[]> {
   const { data: students, error } = await supabase.from("students").select("*");

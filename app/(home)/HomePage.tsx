@@ -1,14 +1,14 @@
-'use client';
+"use client";
 import { useEffect, useState } from "react";
 import { Student } from "@/src/types/student";
-import { getStudents } from "@/src/lib/api/students";
+import { getStudents } from "@/src/features/students/api/students";
 
 export default function HomePage() {
   const [students, setStudents] = useState<Student[]>([]);
   useEffect(() => {
     const fetchStudents = async () => {
       const data = await getStudents();
-      console.log(data)
+      console.log(data);
       setStudents(data as Student[]);
     };
     fetchStudents();
@@ -17,7 +17,9 @@ export default function HomePage() {
     <div>
       <ul>
         {students?.map((student) => (
-          <li key={student.id}>{student.first_name} {student.last_name}</li>
+          <li key={student.id}>
+            {student.first_name} {student.last_name}
+          </li>
         ))}
       </ul>
     </div>

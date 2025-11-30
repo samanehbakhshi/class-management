@@ -1,10 +1,8 @@
-import supabase from "../../services/supabaseClient";
+import supabase from "../../../lib/services/supabaseClient";
 import { User } from "@/src/types/user";
 
 export async function getUsers(): Promise<User[]> {
-  const { data: users, error } = await supabase
-    .from("users")
-    .select("*");
+  const { data: users, error } = await supabase.from("users").select("*");
   if (error) {
     console.error(error);
     throw new Error(error.message);
