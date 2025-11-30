@@ -1,6 +1,5 @@
 import { Attendance } from "@/src/types/attendance";
-import supabase from "../../services/supabaseClient";
-
+import supabase from "../../../lib/services/supabaseClient";
 
 export async function getAttendances(): Promise<Attendance[]> {
   const { data: attendance, error } = await supabase
