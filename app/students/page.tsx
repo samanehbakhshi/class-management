@@ -1,26 +1,38 @@
 "use client";
+import StudentsFilters from "@/src/features/students/components/StudentsFilter";
+import StudentsPagination from "@/src/features/students/components/StudentsPagination";
+import StudentsTable from "@/src/features/students/components/StudentsTable";
+import useDebounce from "@/src/features/students/hooks/useDebounce";
 import { useStudents } from "@/src/features/students/hooks/useStudents";
 import { useState } from "react";
-const initialPageLimit = 10;
+const initialPageLimit = 2;
 
 export default function StudentsPage() {
   // Local UI States
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(initialPageLimit);
   const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState({} as {city?: string; class_id?: number});
+
+  const debouncedSearch = useDebounce(search, 400);
 
   // React Query Fetch
   const {
     data: students,
     isLoading,
     isError,
-  } = useStudents({ page, limit, search, filters });
+  } = useStudents({ page, limit, search: debouncedSearch, filters });
 
   // Handlers (search, filters...)
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
     setPage(1); // reset page when searching
+  };
+
+  // HandlersFilters
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilters(e);
+    setPage(1);
   };
 
   console.log(students?.data, students?.total);
@@ -46,7 +58,7 @@ export default function StudentsPage() {
         <div className="flex items-center gap-3">
           {/* Filters Component */}
           {/* TODO: Create Filter Component */}
-          {/* <StudentsFilters onChange={handleFilterChange} /> */}
+          <StudentsFilters onChange={handleFilterChange} filters={filters} />
 
           {/* Add Button */}
           <button
@@ -64,31 +76,21 @@ export default function StudentsPage() {
         {isError && <p>Error loading students</p>}
 
         {/* TODO: StudentsTable component */}
-        {/* <StudentsTable data={data?.data || []} /> */}
+        <StudentsTable
+          students={students?.data || []}
+          isLoading={isLoading}
+          isError={isError}
+        />
       </div>
-
       {/* Pagination */}
-      <div className="flex justify-end">
-        <div className="flex gap-2 items-center">
-          <button
-            disabled={page === 1}
-            onClick={() => setPage((p) => p - 1)}
-            className="px-3 py-1 border rounded disabled:opacity-40"
-          >
-            Prev
-          </button>
-
-          <span className="text-sm">Page {page}</span>
-
-          <button
-            disabled={students && students?.data?.length < limit}
-            onClick={() => setPage((p) => p + 1)}
-            className="px-3 py-1 border rounded disabled:opacity-40"
-          >
-            Next
-          </button>
-        </div>
-      </div>
+      {students?.total && (
+        <StudentsPagination
+          page={page}
+          limit={limit}
+          total={students?.total}
+          onPageChange={(newPage) => setPage(newPage)}
+        />
+      )}
 
       {/* TODO: Modal for Add/Edit Student */}
       {/* <StudentFormModal /> */}
