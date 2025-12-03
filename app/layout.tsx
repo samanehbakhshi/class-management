@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "@/src/lib/providers/queryProvider";
 import { Toaster } from "react-hot-toast";
+import Sidebar from "@/src/components/layout/sidebar/Sidebar";
+import { Providers } from "@/src/lib/providers/Providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,9 +31,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryProvider>{children}
-          <Toaster position="top-right"/>
-        </QueryProvider>
+        <Providers>
+          <div className="flex min-h-screen">
+            <Sidebar />
+            <div className="w-full bg-gray-2 dark:bg-gray-[#020dla]">
+              {/* <Header /> */}
+            </div>
+            <main className="isolate mx-auto max-w-screen-2xl overflow-hidden p-4 md:p-6 2xl:p-10">
+              {children}
+              <Toaster position="top-right" />
+            </main>
+          </div>
+        </Providers>
       </body>
     </html>
   );
