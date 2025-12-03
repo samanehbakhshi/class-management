@@ -54,8 +54,9 @@ export default function StudentsPage() {
           type="text"
           placeholder="Search students..."
           value={search}
+          disabled={isLoading}
           onChange={handleSearchChange}
-          className="border px-3 py-2 rounded w-64"
+          className="border px-3 py-2 rounded w-64 disabled:bg-gray-200"
         />
 
         {/* Right actions */}
