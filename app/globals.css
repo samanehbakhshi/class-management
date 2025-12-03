@@ -55,7 +55,57 @@
      Shadows
   ========================= */
   --shadow-default: 0px 4px 7px rgba(0,0,0,0.14);
+  --shadow-1: 0px 1px 2px 0px rgba(84, 87, 118, 0.12);
+  --shadow-2: 0px 2px 3px 0px rgba(84, 87, 118, 0.15);
+  --shadow-3: 0px 8px 8.466px 0px rgba(113, 116, 152, 0.05), 0px 8px 16.224px 0px rgba(113, 116, 152, 0.07), 0px 18px 31px 0px rgba(113, 116, 152, 0.10);
+  --shadow-4: 0px 13px 40px 0px rgba(13, 10, 44, 0.22), 0px -8px 18px 0px rgba(13, 10, 44, 0.04);
+  --shadow-5: 0px 10px 30px 0px rgba(85, 106, 235, 0.12), 0px 4px 10px 0px rgba(85, 106, 235, 0.04), 0px -18px 38px 0px rgba(85, 106, 235, 0.04);
+  --shadow-6: 0px 12px 34px 0px rgba(13, 10, 44, 0.08), 0px 34px 26px 0px rgba(13, 10, 44, 0.05);
+  --shadow-7: 0px 18px 25px 0px rgba(113, 116, 152, 0.05);
+
+ 
 }
+
+/* === Transition Properties === */
+.tp-none { transition-property: none; }
+.tp-all { transition-property: all; }
+.tp-width { transition-property: width; }
+.tp-height { transition-property: height; }
+.tp-spacing { transition-property: margin, padding; }
+.tp-opacity { transition-property: opacity; }
+.tp-stroke { transition-property: stroke; }
+
+/* === Transition Duration === */
+.td-0 { transition-duration: 0ms; }
+.td-75 { transition-duration: 75ms; }
+.td-100 { transition-duration: 100ms; }
+.td-150 { transition-duration: 150ms; }
+.td-200 { transition-duration: 200ms; }
+.td-300 { transition-duration: 300ms; }
+.td-500 { transition-duration: 500ms; }
+.td-700 { transition-duration: 700ms; }
+.td-1000 { transition-duration: 1000ms; }
+
+/* === Transition Delay === */
+.tdelay-0 { transition-delay: 0ms; }
+.tdelay-75 { transition-delay: 75ms; }
+.tdelay-100 { transition-delay: 100ms; }
+.tdelay-150 { transition-delay: 150ms; }
+.tdelay-200 { transition-delay: 200ms; }
+.tdelay-300 { transition-delay: 300ms; }
+.tdelay-500 { transition-delay: 500ms; }
+.tdelay-700 { transition-delay: 700ms; }
+.tdelay-1000 { transition-delay: 1000ms; }
+
+/* === Timing Function === */
+.ease-default { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+.ease-linear { transition-timing-function: linear; }
+.ease-in { transition-timing-function: cubic-bezier(0.4, 0, 1, 1); }
+.ease-out { transition-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+.ease-in-out { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+.ease-soft { transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+.ease-bounce { transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1); }
+
 
 @theme inline {
   --color-stroke-dark: #3a3a3a;

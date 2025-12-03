@@ -1,4 +1,4 @@
-import * as Icons from "../../../../assets/icon/Icons";
+import * as Icons from "../Icons";
 
 export const NAV_DATA = [
   {
@@ -9,10 +9,10 @@ export const NAV_DATA = [
         icon: Icons.HomeIcon,
         url: "/",
         items: [
-        //   {
-        //     title: "eCommerce",
-        //     url: "/",
-        //   },
+          //   {
+          //     title: "eCommerce",
+          //     url: "/",
+          //   },
         ],
       },
       {
@@ -32,14 +32,14 @@ export const NAV_DATA = [
         icon: Icons.Alphabet,
         url: "/classes",
         items: [
-        //   {
-        //     title: "Form Elements",
-        //     url: "/forms/form-elements",
-        //   },
-        //   {
-        //     title: "Form Layout",
-        //     url: "/forms/form-layout",
-        //   },
+          //   {
+          //     title: "Form Elements",
+          //     url: "/forms/form-elements",
+          //   },
+          //   {
+          //     title: "Form Layout",
+          //     url: "/forms/form-layout",
+          //   },
         ],
       },
       {
@@ -47,22 +47,22 @@ export const NAV_DATA = [
         url: "/attendance",
         icon: Icons.Table,
         items: [
-        //   {
-        //     title: "Tables",
-        //     url: "/tables",
-        //   },
+          //   {
+          //     title: "Tables",
+          //     url: "/tables",
+          //   },
         ],
       },
-    //   {
-    //     title: "Pages",
-    //     icon: Icons.Alphabet,
-    //     items: [
-    //       {
-    //         title: "Settings",
-    //         url: "/pages/settings",
-    //       },
-    //     ],
-    //   },
+      //   {
+      //     title: "Pages",
+      //     icon: Icons.Alphabet,
+      //     items: [
+      //       {
+      //         title: "Settings",
+      //         url: "/pages/settings",
+      //       },
+      //     ],
+      //   },
     ],
   },
   {

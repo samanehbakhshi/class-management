@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Student } from "@/src/types/student";
+import { Student } from "@/types/student";
 import useDeleteStudents from "../hooks/useDeleteStudents";
-import ConfirmModal from "@/src/components/ConfirmModal";
+import ConfirmModal from "@/components/ConfirmModal";
 import toast from "react-hot-toast";
 
 interface StudentTableProps {

@@ -1,11 +1,11 @@
 "use client";
-import Modal from "@/src/components/Modal";
-import StudentForm from "@/src/features/students/components/StudentForm";
-import StudentsFilters from "@/src/features/students/components/StudentsFilter";
-import StudentsPagination from "@/src/features/students/components/StudentsPagination";
-import StudentsTable from "@/src/features/students/components/StudentsTable";
-import useDebounce from "@/src/features/students/hooks/useDebounce";
-import { useStudents } from "@/src/features/students/hooks/useStudents";
+import Modal from "@/components/Modal";
+import StudentForm from "@/features/students/components/StudentForm";
+import StudentsFilters from "@/features/students/components/StudentsFilter";
+import StudentsPagination from "@/features/students/components/StudentsPagination";
+import StudentsTable from "@/features/students/components/StudentsTable";
+import useDebounce from "@/features/students/hooks/useDebounce";
+import { useStudents } from "@/features/students/hooks/useStudents";
 import { useState } from "react";
 const initialPageLimit = 2;
 
@@ -14,7 +14,9 @@ export default function StudentsPage() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(initialPageLimit);
   const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState({} as {city?: string; class_id?: number});
+  const [filters, setFilters] = useState(
+    {} as { city?: string; class_id?: number }
+  );
   const [isModalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<null | { id: number }>(null);
 

@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function Modal({ isOpen, onClose, children }: Props) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLInputElement>(null);
   useClickOutSide(ref, onClose);
   if (!isOpen) return null;
   return (

@@ -1,9 +1,9 @@
 "use client";
-import { cn } from "@/src/lib/utils/cn";
+import { cn } from "@/lib/utils/cn";
 import React, { useState } from "react";
 import { useSidebarContext } from "./SidebarContext";
 import Link from "next/link";
-import { ArrowLeftIcon, ChevronUp } from "@/src/assets/icon/Icons";
+import { ArrowLeftIcon, ChevronUp } from "@/components/layout/sidebar/Icons";
 import { NAV_DATA } from "./data/Index";
 import { MenuItem } from "./MenuItem";
 import { usePathname } from "next/navigation";
@@ -19,7 +19,7 @@ export default function Sidebar() {
 
     // Uncomment the following line to enable multiple expanded items
     setExpandedItems((prev) =>
-      prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title],
+      prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title]
     );
   };
   return (

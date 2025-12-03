@@ -1,4 +1,4 @@
-import { Student } from "@/src/types/student";
+import { Student } from "@/types/student";
 import supabase from "../../../lib/services/supabaseClient";
 import { GetStudentsParams } from "../types";
 

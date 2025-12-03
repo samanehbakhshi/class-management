@@ -1,5 +1,5 @@
 import supabase from "../../services/supabaseClient";
-import { Class } from "@/src/types/class";
+import { Class } from "@/types/class";
 
 export async function getClasses(): Promise<Class[]> {
   const { data: classes, error } = await supabase.from("classes").select("*");

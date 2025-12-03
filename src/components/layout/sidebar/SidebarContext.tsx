@@ -1,6 +1,6 @@
 "use client";
 
-import { useIsMobile } from "@/src/hooks/useIsMobile";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
 
@@ -58,4 +58,3 @@ export function SidebarProvider({
     </SidebarContext.Provider>
   );
 }
-
