@@ -2,8 +2,8 @@ import React from 'react'
 import { useStudents } from '../hooks/useStudents';
 import { Student } from '@/src/types/student';
 
-export default function StudentsTable({students, isError, isLoading} ) {
-//   const { data, isLoading, isError } = useStudents(params);
+export default function StudentsTable({students, isError, isLoading, setModalOpen, setEditing} ) {
+
 
 
   if (isLoading) return <p>Loading...</p>;
@@ -11,7 +11,7 @@ export default function StudentsTable({students, isError, isLoading} ) {
 
   if (!students || students.length === 0) return <p>No students found.</p>;
 
-//   const students = students.data;
+
 
   return (
     <div>
@@ -45,7 +45,11 @@ export default function StudentsTable({students, isError, isLoading} ) {
               <td className="p-2">{s.province}</td>
 
               <td className="p-2">
-                <button className="text-blue-500 mr-2">Edit</button>
+                <button className="text-blue-500 mr-2" onClick={() => {
+                   setEditing(s); 
+                   setModalOpen(true)
+                  }
+                   }>Edit</button>
                 <button className="text-red-500">Delete</button>
               </td>
             </tr>

@@ -1,4 +1,6 @@
 "use client";
+import Modal from "@/src/components/Modal";
+import StudentForm from "@/src/features/students/components/StudentForm";
 import StudentsFilters from "@/src/features/students/components/StudentsFilter";
 import StudentsPagination from "@/src/features/students/components/StudentsPagination";
 import StudentsTable from "@/src/features/students/components/StudentsTable";
@@ -13,6 +15,8 @@ export default function StudentsPage() {
   const [limit, setLimit] = useState(initialPageLimit);
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({} as {city?: string; class_id?: number});
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [editing, setEditing] = useState<null | { id: number }>(null);
 
   const debouncedSearch = useDebounce(search, 400);
 
@@ -64,6 +68,7 @@ export default function StudentsPage() {
           <button
             className="bg-blue-600 text-white px-4 py-2 rounded"
             // TODO: open modal
+            onClick={() => setModalOpen(true)}
           >
             Add Student
           </button>
@@ -80,6 +85,8 @@ export default function StudentsPage() {
           students={students?.data || []}
           isLoading={isLoading}
           isError={isError}
+          setEditing={setEditing}
+          setModalOpen={setModalOpen}
         />
       </div>
       {/* Pagination */}
@@ -93,7 +100,13 @@ export default function StudentsPage() {
       )}
 
       {/* TODO: Modal for Add/Edit Student */}
-      {/* <StudentFormModal /> */}
+      <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+        <StudentForm
+          isOpen={isModalOpen}
+          onClose={() => setModalOpen(false)}
+          initialValues={editing ?? undefined}
+        />
+      </Modal>
     </div>
   );
 }
