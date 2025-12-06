@@ -19,6 +19,7 @@
   --color-stroke-dark: #27303E;
 
   --color-dark: #111928;
+  --color-dark-1: #F9FAFB;
   --color-dark-2: #1F2A37;
   --color-dark-3: #374151;
   --color-dark-4: #4B5563;
@@ -28,6 +29,12 @@
   --color-dark-8: #E5E7EB;
 
   --color-gray: #EFF4FB;
+  --color-gray-2: #F3F4F6;
+  --color-gray-3: #E5E7EB;
+  --color-gray-4: #D1D5DB;
+  --color-gray-5: #9CA3AF;
+  --color-gray-6: #6B7280;
+  --color-gray-7: #374151;
   --color-gray-dark: #122031;
 
   /* ==========================

@@ -3,6 +3,16 @@ import { Student } from "@/types/student";
 import useDeleteStudents from "../hooks/useDeleteStudents";
 import ConfirmModal from "@/components/ConfirmModal";
 import toast from "react-hot-toast";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/table/Table";
+import TableContainer from "@/components/table/TableContainer";
+import { PencilSquareIcon, TrashIcon, XIcon } from "@/assets/icon/Icons";
 
 interface StudentTableProps {
   students: Student[];
@@ -47,56 +57,62 @@ export default function StudentsTable({
   if (!students || students.length === 0) return <p>No students found.</p>;
 
   return (
-    <div>
-      <table className="w-full border-collapse">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="p-2 text-gray-800">Row</th>
-            <th className="p-2 text-gray-800">Full Name</th>
-            <th className="p-2 text-gray-800">Student ID</th>
-            <th className="p-2 text-gray-800">Email</th>
-            <th className="p-2 text-gray-800">Phone</th>
-            <th className="p-2 text-gray-800">Gender</th>
-            <th className="p-2 text-gray-800">DOB</th>
-            <th className="p-2 text-gray-800">Actions</th>
-          </tr>
-        </thead>
+    <>
+      <Table>
+        <TableHeader>
+          <TableRow className="border-none uppercase [&>th]:text-center">
+            <TableHead className="min-w-[120px] text-left">ردیف</TableHead>
+            <TableHead className="p-2 text-gray-800">نام و نام خانوادگی</TableHead>
+            {/* <TableHead className="p-2 text-gray-800">Student ID</TableHead> */}
+            <TableHead className="p-2 text-gray-800">ایمیل</TableHead>
+            <TableHead className="p-2 text-gray-800">تلفن</TableHead>
+            <TableHead className="p-2 text-gray-800">جنسیت</TableHead>
+            <TableHead className="p-2 text-gray-800">تاریخ تولد</TableHead>
+            <TableHead className="p-2 text-gray-800">شهر</TableHead>
+            <TableHead className="p-2 text-gray-800">عملیات</TableHead>
+          </TableRow>
+        </TableHeader>
 
-        <tbody>
+        <TableBody>
           {students.map((s: Student, index: number) => (
-            <tr key={s.id} className="border-b">
-              <td className="p-2">{index + 1}</td>
-              <td className="p-2">
+            <TableRow
+              key={s.id}
+              className="text-center text-base font-medium text-dark dark:text-white"
+            >
+              <TableCell className=" text-gray-800 dark:text-dark-6">
+                {index + 1}
+              </TableCell>
+              <TableCell className="p-2">
                 {s.first_name} {s.last_name}
-              </td>
-              <td className="p-2">{s.id}</td>
-              <td className="p-2">{s.national_id}</td>
-              <td className="p-2">{s.phone}</td>
-              <td className="p-2">{s.phone}</td>
-              <td className="p-2">{s.province}</td>
+              </TableCell>
+              <TableCell className="p-2">{s.id}</TableCell>
+              <TableCell className="p-2">{s.national_id}</TableCell>
+              <TableCell className="p-2">{s.phone}</TableCell>
+              <TableCell className="p-2">{s.phone}</TableCell>
+              <TableCell className="p-2">{s.province}</TableCell>
 
-              <td className="p-2">
+              <TableCell className="p-2">
                 <button
-                  className="text-blue-500 mr-2"
+                  className=" mr-2"
                   onClick={() => {
                     setEditing(s);
                     setModalOpen(true);
                   }}
                 >
-                  Edit
+                  <PencilSquareIcon/>
                 </button>
                 <button
-                  className="text-red-500"
+                  className="text-red-400 mr-1"
                   onClick={() => handleConfrim(s.id)}
                   disabled={isPending}
                 >
-                  Delete
+                  <TrashIcon/>
                 </button>
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
       {confirmOpen && (
         <ConfirmModal
           isOpen={confirmOpen}
@@ -106,6 +122,6 @@ export default function StudentsTable({
           onConfirm={handleDelete}
         />
       )}
-    </div>
+    </>
   );
 }

@@ -1,4 +1,6 @@
-import type { IconProps } from "@/types/icon-props";
+
+
+import { IconProps } from "@/types/iconProps";
 
 export function MenuIcon(props: IconProps) {
   return (

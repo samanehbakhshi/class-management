@@ -1,5 +1,7 @@
 "use client";
+import Button from "@/components/Button";
 import Modal from "@/components/Modal";
+import TableContainer from "@/components/table/TableContainer";
 import StudentForm from "@/features/students/components/StudentForm";
 import StudentsFilters from "@/features/students/components/StudentsFilter";
 import StudentsPagination from "@/features/students/components/StudentsPagination";
@@ -68,40 +70,41 @@ export default function StudentsPage() {
           <StudentsFilters onChange={handleFilterChange} filters={filters} />
 
           {/* Add Button */}
-          <button
-            className="bg-blue-600 text-white px-4 py-2 rounded"
+          <Button
+            label="افزودن"
+            className=""
+            variant={"outlinePrimary"}
+            shape={"rounded"}
             // TODO: open modal
             onClick={() => setModalOpen(true)}
-          >
-            Add Student
-          </button>
+          />
         </div>
       </div>
+      <TableContainer className="" title={"دانش آموزان"}>
+        {/* Table Section */}
+        <div>
+          {isLoading && <p>Loading...</p>}
+          {isError && <p>Error loading students</p>}
 
-      {/* Table Section */}
-      <div>
-        {isLoading && <p>Loading...</p>}
-        {isError && <p>Error loading students</p>}
-
-        {/* TODO: StudentsTable component */}
-        <StudentsTable
-          students={students?.data || []}
-          isLoading={isLoading}
-          isError={isError}
-          setEditing={setEditing}
-          setModalOpen={setModalOpen}
-        />
-      </div>
-      {/* Pagination */}
-      {students?.total && (
-        <StudentsPagination
-          page={page}
-          limit={limit}
-          total={students?.total}
-          onPageChange={(newPage) => setPage(newPage)}
-        />
-      )}
-
+          {/* TODO: StudentsTable component */}
+          <StudentsTable
+            students={students?.data || []}
+            isLoading={isLoading}
+            isError={isError}
+            setEditing={setEditing}
+            setModalOpen={setModalOpen}
+          />
+        </div>
+        {/* Pagination */}
+        {students?.total && (
+          <StudentsPagination
+            page={page}
+            limit={limit}
+            total={students?.total}
+            onPageChange={(newPage) => setPage(newPage)}
+          />
+        )}
+      </TableContainer>
       {/* TODO: Modal for Add/Edit Student */}
       <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
         <StudentForm
