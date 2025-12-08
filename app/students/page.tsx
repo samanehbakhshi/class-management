@@ -50,12 +50,13 @@ export default function StudentsPage() {
   return (
     <div className="p-6 space-y-6">
       {/* Page Title */}
-      <div>Students</div>
+      <div>دانش آموزان</div>
+      
 
       {/* Search + Filters + Add Button */}
       <div className="flex items-center justify-between gap-4">
         {/* Search */}
-        <input
+        <Input
           type="text"
           placeholder="...جستجو"
           value={search}
@@ -74,7 +75,7 @@ export default function StudentsPage() {
           <Button
             label="افزودن"
             className=""
-            variant={"outlinePrimary"}
+            variant={"primary"}
             shape={"rounded"}
             // TODO: open modal
             onClick={() => {setModalOpen(true) 

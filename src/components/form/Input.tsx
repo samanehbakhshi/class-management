@@ -17,7 +17,7 @@ export default function Input({ error, className, ...props }: InputProps) {
         {...props}
         dir="auto"
       ></input>
-      {error && <p className="text-red-500 text-sm">{error}</p>}
+      {/* {error && <p className="text-red-500 text-sm">{error}</p>} */}
     </>
   );
 }

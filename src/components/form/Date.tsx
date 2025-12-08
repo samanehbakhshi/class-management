@@ -31,7 +31,6 @@ export default function DateInput({
       {label && <label className="font-medium text-sm">{label}</label>}
       <DatePicker
         {...props}
-        // value={value}
         value={
           value
             ? new DateObject({
@@ -45,15 +44,12 @@ export default function DateInput({
           onChange(d.toDate());
         }}
         format={"YYYY/MM/DD"}
-        // value={new Date(value)}
         locale={persian_fa}
         calendar={persian}
         inputClass={baseClasses}
         className="bg-dark"
-
-        // className={cn(className, "bg-dark")}
       />
-      {error && <p className="text-sm text-red-500">{error}</p>}
+      {/* {error && <p className="text-sm text-red-500">{error}</p>} */}
     </div>
   );
 }

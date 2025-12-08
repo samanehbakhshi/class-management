@@ -23,9 +23,10 @@ export default function FormField({
   className,
   ...rest
 }: FormFieldProps) {
+  console.log(rules)
   return (
     <div>
-      {label && <label className="block mb-1">{<span></span>}{label}</label>}
+      {label && <label className="block mb-1">{rules && <span className="text-red-600 text-md">*</span>}{label}</label>}
       <Controller
         name={name}
         control={control}

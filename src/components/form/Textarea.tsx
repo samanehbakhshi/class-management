@@ -20,7 +20,7 @@ export default function Textarea({ error, className,rows= 4, ...props }: InputPr
         rows={rows}
         
       ></textarea>
-      {error && <p className="text-red-500 text-sm">{error}</p>}
+      {/* {error && <p className="text-red-500 text-sm">{error}</p>} */}
     </>
   );
 }

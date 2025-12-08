@@ -13,6 +13,7 @@ import Select from "@/components/form/Select";
 import DateInput from "@/components/form/Date";
 import useStudent from "../hooks/useStudent";
 import Button from "@/components/Button";
+import { required } from "zod/v4-mini";
 
 type Props = {
   isOpen: boolean;
@@ -24,7 +25,7 @@ type Props = {
 const defaultValues = {
   first_name: "",
   last_name: "",
-  id: null,
+  id: "",
   date_of_birth: undefined,
   gender: undefined,
   email: "",
@@ -66,7 +67,7 @@ export default function StudentForm({ onClose, editId }: Props) {
 
   const onSubmit = async (data: StudentFormValues) => {
     console.log(data);
-    // const {id, ...rest} = data;
+    const {id, ...rest} = data;
     // console.log(rest)
     try {
       if (editId) {
@@ -76,7 +77,7 @@ export default function StudentForm({ onClose, editId }: Props) {
           payload: data,
         });
       } else {
-        await createMutation.mutateAsync(data);
+        await createMutation.mutateAsync(rest);
       }
       onClose();
     } catch (err) {
@@ -98,18 +99,21 @@ export default function StudentForm({ onClose, editId }: Props) {
             control={control}
             component={Input}
             label="نام"
+            rules={required}
           />
           <FormField
             name={"last_name"}
             control={control}
             component={Input}
             label=" نام خانوادگی "
+            rules={required}
           />
           <FormField
             name={"email"}
             control={control}
             component={Input}
             label="ایمیل"
+            rules={required}
           />
           <FormField
             name={"phone"}
