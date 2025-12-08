@@ -19,7 +19,7 @@ export default function Modal({ isOpen, onClose, children }: Props) {
     >
       <div
         ref={ref}
-        className="w-full max-w-2xl bg-white rounded shadow-lg p-6 flex flex-col gap-2 items-end"
+        className="w-full max-w-2xl bg-white rounded shadow-lg p-6 flex flex-col gap-2 items-end shadow-3 dark:bg-gray-dark"
       >
         <button onClick={onClose} className="text-red-600 font-bold text-xl ">
           x

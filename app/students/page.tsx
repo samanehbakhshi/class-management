@@ -1,5 +1,6 @@
 "use client";
 import Button from "@/components/Button";
+import Input from "@/components/form/Input";
 import Modal from "@/components/Modal";
 import TableContainer from "@/components/table/TableContainer";
 import StudentForm from "@/features/students/components/StudentForm";
@@ -20,7 +21,7 @@ export default function StudentsPage() {
     {} as { city?: string; class_id?: number }
   );
   const [isModalOpen, setModalOpen] = useState(false);
-  const [editing, setEditing] = useState<null | { id: number }>(null);
+  const [editId, setEditId] = useState<null | { id: number }>(null);
 
   const debouncedSearch = useDebounce(search, 400);
 
@@ -56,7 +57,7 @@ export default function StudentsPage() {
         {/* Search */}
         <input
           type="text"
-          placeholder="Search students..."
+          placeholder="...جستجو"
           value={search}
           disabled={isLoading}
           onChange={handleSearchChange}
@@ -76,7 +77,9 @@ export default function StudentsPage() {
             variant={"outlinePrimary"}
             shape={"rounded"}
             // TODO: open modal
-            onClick={() => setModalOpen(true)}
+            onClick={() => {setModalOpen(true) 
+              setEditId(null)
+            }}
           />
         </div>
       </div>
@@ -91,7 +94,7 @@ export default function StudentsPage() {
             students={students?.data || []}
             isLoading={isLoading}
             isError={isError}
-            setEditing={setEditing}
+            setEditId={setEditId}
             setModalOpen={setModalOpen}
           />
         </div>
@@ -110,7 +113,7 @@ export default function StudentsPage() {
         <StudentForm
           isOpen={isModalOpen}
           onClose={() => setModalOpen(false)}
-          initialValues={editing ?? undefined}
+          editId={editId ?? undefined}
         />
       </Modal>
     </div>

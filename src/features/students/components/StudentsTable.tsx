@@ -19,7 +19,7 @@ interface StudentTableProps {
   isError: boolean;
   isLoading: boolean;
   setModalOpen: (open: boolean) => void;
-  setEditing: (student: Student | null) => void;
+  setEditId: (studentId: number | null) => void;
 }
 
 export default function StudentsTable({
@@ -27,7 +27,7 @@ export default function StudentsTable({
   isError,
   isLoading,
   setModalOpen,
-  setEditing,
+  setEditId,
 }: StudentTableProps) {
   const { mutate: removeStudent, isPending } = useDeleteStudents();
   // Local States
@@ -95,7 +95,7 @@ export default function StudentsTable({
                 <button
                   className=" mr-2"
                   onClick={() => {
-                    setEditing(s);
+                    setEditId(s.id);
                     setModalOpen(true);
                   }}
                 >
