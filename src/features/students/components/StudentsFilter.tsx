@@ -1,43 +1,38 @@
 "use client";
 import React from "react";
 import { useFilterOptions } from "../hooks/useFilterOptions";
+import Select from "@/components/form/Select";
 
 export default function StudentsFilters({ filters, onChange }) {
   const { classes, cities } = useFilterOptions();
-  console.log(cities, classes);
+  const classesOptions = classes.map((item) => {
+    return {
+      label: item.name,
+      value: item.id,
+    };
+  });
+
+  const citiesOption = cities.map((city: { city: string }) => {
+    return { label: city.city, value: city.city };
+  });
   return (
     <div className="flex gap-3">
       {/* City */}
-      <select
+      <Select
+        options={citiesOption}
+        className=""
+        defaultOPtion="شهر"
         value={filters.city}
         onChange={(e) => onChange({ ...filters, city: e.target.value })}
-        className="border p-2 rounded"
-      >
-        <option value={"All cities"}>All Cities</option>
-        {cities.map((city) => {
-          return (
-            <>
-              <option value={city.city}>{city.city}</option>
-            </>
-          );
-        })}
-      </select>
-      {/* Class Id */}
-      <select
+      />
+      {/* Class */}
+      <Select
+        options={classesOptions}
+        defaultOPtion="کلاس"
+        className="min-w-16"
         value={filters.class_id}
         onChange={(e) => onChange({ ...filters, class_id: e.target.value })}
-        className="border p-2 rounded"
-      >
-      
-        <option value={"All Classes"}>All Calsses</option>
-        {classes.map((item) => {
-          return (
-            <>
-              <option value={item.class_id}>{item.name}</option>
-            </>
-          );
-        })}
-      </select>
+      />
     </div>
   );
 }

@@ -34,7 +34,7 @@ const columns: Column<Student>[] = [
   { key: "province", label: "شهر" },
 ];
 
-export default function StudentsTable({
+export default function ClassTable({
   students,
   isError,
   isLoading,
@@ -97,62 +97,7 @@ export default function StudentsTable({
         )}
       />
 
-      {/* <Table>
-        <TableHeader>
-          <TableRow className="border-none uppercase [&>th]:text-center">
-            <TableHead className="min-w-[120px] text-left">ردیف</TableHead>
-            <TableHead className="p-2 text-gray-800">
-              نام و نام خانوادگی
-            </TableHead>
-            <TableHead className="p-2 text-gray-800">ایمیل</TableHead>
-            <TableHead className="p-2 text-gray-800">تلفن</TableHead>
-            <TableHead className="p-2 text-gray-800">جنسیت</TableHead>
-            <TableHead className="p-2 text-gray-800">تاریخ تولد</TableHead>
-            <TableHead className="p-2 text-gray-800">شهر</TableHead>
-            <TableHead className="p-2 text-gray-800">عملیات</TableHead>
-          </TableRow>
-        </TableHeader>
 
-        <TableBody>
-          {students.map((s: Student, index: number) => (
-            <TableRow
-              key={s.id}
-              className="text-center text-base font-medium text-dark dark:text-white"
-            >
-              <TableCell className=" text-gray-800 dark:text-dark-6">
-                {index + 1}
-              </TableCell>
-              <TableCell className="p-2">
-                {s.first_name} {s.last_name}
-              </TableCell>
-              <TableCell className="p-2">{s.id}</TableCell>
-              <TableCell className="p-2">{s.national_id}</TableCell>
-              <TableCell className="p-2">{s.phone}</TableCell>
-              <TableCell className="p-2">{s.phone}</TableCell>
-              <TableCell className="p-2">{s.province}</TableCell>
-
-              <TableCell className="p-2">
-                <button
-                  className=" mr-2"
-                  onClick={() => {
-                    setEditId(s.id);
-                    setModalOpen(true);
-                  }}
-                >
-                  <PencilSquareIcon />
-                </button>
-                <button
-                  className="text-red-400 mr-1"
-                  onClick={() => handleConfrim(s.id)}
-                  disabled={isPending}
-                >
-                  <TrashIcon />
-                </button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table> */}
       {confirmOpen && (
         <ConfirmModal
           isOpen={confirmOpen}

@@ -1,4 +1,4 @@
-import { Attendance } from "@/src/types/attendance";
+import { Attendance } from "@/types/attendance";
 import supabase from "../../../lib/services/supabaseClient";
 
 export async function getAttendances(): Promise<Attendance[]> {

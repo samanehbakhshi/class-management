@@ -1,11 +1,14 @@
 "use client";
-import Modal from "@/src/components/Modal";
-import StudentForm from "@/src/features/students/components/StudentForm";
-import StudentsFilters from "@/src/features/students/components/StudentsFilter";
-import StudentsPagination from "@/src/features/students/components/StudentsPagination";
-import StudentsTable from "@/src/features/students/components/StudentsTable";
-import useDebounce from "@/src/features/students/hooks/useDebounce";
-import { useStudents } from "@/src/features/students/hooks/useStudents";
+import Button from "@/components/Button";
+import Input from "@/components/form/Input";
+import Modal from "@/components/Modal";
+import TableContainer from "@/components/table/TableContainer";
+import StudentForm from "@/features/students/components/StudentForm";
+import StudentsFilters from "@/features/students/components/StudentsFilter";
+import StudentsPagination from "@/features/students/components/StudentsPagination";
+import StudentsTable from "@/features/students/components/StudentsTable";
+import useDebounce from "@/features/students/hooks/useDebounce";
+import { useStudents } from "@/features/students/hooks/useStudents";
 import { useState } from "react";
 const initialPageLimit = 2;
 
@@ -14,9 +17,11 @@ export default function StudentsPage() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(initialPageLimit);
   const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState({} as {city?: string; class_id?: number});
+  const [filters, setFilters] = useState(
+    {} as { city?: string; class_id?: number }
+  );
   const [isModalOpen, setModalOpen] = useState(false);
-  const [editing, setEditing] = useState<null | { id: number }>(null);
+  const [editId, setEditId] = useState<null | { id: number }>(null);
 
   const debouncedSearch = useDebounce(search, 400);
 
@@ -45,14 +50,15 @@ export default function StudentsPage() {
   return (
     <div className="p-6 space-y-6">
       {/* Page Title */}
-      <div>Students</div>
+      <div>دانش آموزان</div>
+      
 
       {/* Search + Filters + Add Button */}
       <div className="flex items-center justify-between gap-4">
         {/* Search */}
-        <input
+        <Input
           type="text"
-          placeholder="Search students..."
+          placeholder="...جستجو"
           value={search}
           disabled={isLoading}
           onChange={handleSearchChange}
@@ -66,46 +72,49 @@ export default function StudentsPage() {
           <StudentsFilters onChange={handleFilterChange} filters={filters} />
 
           {/* Add Button */}
-          <button
-            className="bg-blue-600 text-white px-4 py-2 rounded"
+          <Button
+            label="افزودن"
+            className=""
+            variant={"primary"}
+            shape={"rounded"}
             // TODO: open modal
-            onClick={() => setModalOpen(true)}
-          >
-            Add Student
-          </button>
+            onClick={() => {setModalOpen(true) 
+              setEditId(null)
+            }}
+          />
         </div>
       </div>
+      <TableContainer className="" title={"دانش آموزان"}>
+        {/* Table Section */}
+        <div>
+          {isLoading && <p>Loading...</p>}
+          {isError && <p>Error loading students</p>}
 
-      {/* Table Section */}
-      <div>
-        {isLoading && <p>Loading...</p>}
-        {isError && <p>Error loading students</p>}
-
-        {/* TODO: StudentsTable component */}
-        <StudentsTable
-          students={students?.data || []}
-          isLoading={isLoading}
-          isError={isError}
-          setEditing={setEditing}
-          setModalOpen={setModalOpen}
-        />
-      </div>
-      {/* Pagination */}
-      {students?.total && (
-        <StudentsPagination
-          page={page}
-          limit={limit}
-          total={students?.total}
-          onPageChange={(newPage) => setPage(newPage)}
-        />
-      )}
-
+          {/* TODO: StudentsTable component */}
+          <StudentsTable
+            students={students?.data || []}
+            isLoading={isLoading}
+            isError={isError}
+            setEditId={setEditId}
+            setModalOpen={setModalOpen}
+          />
+        </div>
+        {/* Pagination */}
+        {students?.total && (
+          <StudentsPagination
+            page={page}
+            limit={limit}
+            total={students?.total}
+            onPageChange={(newPage) => setPage(newPage)}
+          />
+        )}
+      </TableContainer>
       {/* TODO: Modal for Add/Edit Student */}
       <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
         <StudentForm
           isOpen={isModalOpen}
           onClose={() => setModalOpen(false)}
-          initialValues={editing ?? undefined}
+          editId={editId ?? undefined}
         />
       </Modal>
     </div>
