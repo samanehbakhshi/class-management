@@ -1,12 +1,12 @@
+import { PaginationProps } from "@/types";
 import React from "react";
-import { StudentPaginationProps } from "../types";
 
 export default function StudentsPagination({
   page,
   limit,
   total,
   onPageChange,
-}: StudentPaginationProps) {
+}: PaginationProps) {
   const totalPages = Math.ceil(total / limit);
 
   return (

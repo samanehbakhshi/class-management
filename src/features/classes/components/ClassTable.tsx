@@ -1,19 +1,10 @@
 import React, { useState } from "react";
 import { Student } from "@/types/student";
-import useDeleteStudents from "../hooks/useDeleteStudents";
 import ConfirmModal from "@/components/ConfirmModal";
 import toast from "react-hot-toast";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/table/Table";
-import TableContainer from "@/components/table/TableContainer";
 import { PencilSquareIcon, TrashIcon, XIcon } from "@/assets/icon/Icons";
 import DataTable, { Column } from "@/components/table/DataTable";
+import { useDeleteClass } from "../hooks/useDeleteClass";
 
 interface StudentTableProps {
   students: Student[];
@@ -23,15 +14,15 @@ interface StudentTableProps {
   setEditId: (studentId: number | null) => void;
 }
 
-
 const columns: Column<Student>[] = [
   { key: "id", label: "ردیف", render: (_, index) => index + 1 },
-  { key: "first_name", label: "نام" },
-  { key: "last_name", label: "نام خانوادگی" },
-  { key: "email", label: "ایمیل" },
-  { key: "gender", label: "جنسیت" },
-  { key: "phone", label: "تلفن" },
-  { key: "province", label: "شهر" },
+  { key: "name", label: "کلاس" },
+  { key: "teacher", label: "نام معلم" },
+  { key: "grade", label: "نمره" },
+  { key: "subject", label: "موضوع" },
+  { key: "session_count", label: "تعداد جلسات" },
+  { key: "start_date", label: "تاریخ شروع" },
+  { key: "start_time", label: "زمان شروع" },
 ];
 
 export default function ClassTable({
@@ -41,7 +32,7 @@ export default function ClassTable({
   setModalOpen,
   setEditId,
 }: StudentTableProps) {
-  const { mutate: removeStudent, isPending } = useDeleteStudents();
+  const { mutate: removeStudent, isPending } = useDeleteClass();
   // Local States
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -66,9 +57,7 @@ export default function ClassTable({
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
 
-  if (!students || students.length === 0) return <p>No students found.</p>;
-
- 
+  if (!students || students.length === 0) return <p>No classes found.</p>;
 
   return (
     <>
@@ -96,7 +85,6 @@ export default function ClassTable({
           </>
         )}
       />
-
 
       {confirmOpen && (
         <ConfirmModal
