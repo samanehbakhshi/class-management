@@ -29,7 +29,7 @@ export default function StudentForm({ onClose, editId }: Props) {
   const {data : classes } =useClasses({});
   const classOptions = classes?.data?.map((item) =>{
     return {
-      value: item.id,
+      value: Number(item.id),
        label: item.name
       }
   });

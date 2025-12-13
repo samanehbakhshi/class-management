@@ -41,7 +41,7 @@ export default function FormField({
               error={fieldState.error?.message}
               className={className}
               onChange={(val: any) => {
-                console.log("[Component->onChange]", name, "val:",typeof val, );
+                console.log("[Component->onChange]", name, "val:", val, );
                 // اگر date picker است، ببین val چی هست
                 field.onChange(val);
               }}

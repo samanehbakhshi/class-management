@@ -16,13 +16,13 @@ type Props = {
 const defaultValues = {
   name: "",
   teacher: "",
-  id: "",
+  id: undefined,
   session_count: "",
   start_date: undefined,
   start_time: undefined,
   subject: "",
   grade: "",
-}; ;
+}; 
 
 export default function ClassForm({ onClose, editId }: Props) {
 //   const { data: classData } = useClasses(editId);
@@ -45,11 +45,11 @@ export default function ClassForm({ onClose, editId }: Props) {
     {
       name: "session_count",
       label: "تعداد جلسات",
-      type: "text",
+      type: "number",
       required: true,
     },
     { name: "start_date", label: "تایخ شروع", type: "date", required: true },
-    { name: "start_time", label: "زمان شروع", type: "date", required: true },
+    { name: "start_time", label: "زمان شروع", type: "time", required: true },
     
   ];
 

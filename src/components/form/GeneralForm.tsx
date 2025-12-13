@@ -10,13 +10,17 @@ import Input from "./Input";
 import Button from "../Button";
 import { FormConfig } from "@/types/formTypes";
 import { z } from "zod";
+import Time from "./Time";
+import NumberInput from "./NumberInput";
 interface GeneralFormProps<TValues> {
   config: FormConfig;
   useGetItem: (id: number | null) => { data?: TValues } | void;
   editId: number | null;
   onClose: () => void;
-  createItem: {mutateAsync :(values: TValues) => Promise<any>};
-  updateItem: {mutateAsync: (payload:{id: number, values: TValues}) => Promise<any>};
+  createItem: { mutateAsync: (values: TValues) => Promise<any> };
+  updateItem: {
+    mutateAsync: (payload: { id: number; values: TValues }) => Promise<any>;
+  };
   schema: z.ZodSchema<TValues>;
   defaultValues?: TValues;
 }
@@ -29,14 +33,11 @@ export default function GeneralForm<TValues>({
   createItem,
   updateItem,
   schema,
-  defaultValues ,
+  defaultValues,
 }: GeneralFormProps<TValues>) {
-
   // Fetch existing data when editId exists
   const result = useGetItem(editId);
   const data = result?.data;
-
-
 
   const {
     handleSubmit,
@@ -55,9 +56,10 @@ export default function GeneralForm<TValues>({
   }, [data, reset]);
 
   const onSubmit = async (values: TValues) => {
+    const {id, ...payload} = values;
     editId
-      ? await updateItem.mutateAsync({id: editId,payload: values})
-      : await createItem.mutateAsync(values);
+      ? await updateItem.mutateAsync({ id: id, payload: payload })
+      : await createItem.mutateAsync(payload);
     onClose();
   };
   return (
@@ -75,6 +77,10 @@ export default function GeneralForm<TValues>({
                 ? Select
                 : field.type === "date"
                 ? DateInput
+                : field.type === "time"
+                ? Time 
+                :field.type === "number"
+                ? NumberInput
                 : Input
             }
             label={field.label}

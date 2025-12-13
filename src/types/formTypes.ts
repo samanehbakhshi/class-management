@@ -2,6 +2,7 @@ export type FormFieldType =
   | "text"
   | "email"
   | "number"
+  | "time"
   | "select"
   | "textarea"
   | "date"
