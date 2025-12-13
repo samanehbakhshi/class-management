@@ -1,24 +1,16 @@
 "use client";
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { studentSchema, type StudentFormValues } from "../validation";
 import { useCreateStudent } from "../hooks/useCreateStudent";
 import { useUpdateStudent } from "../hooks/useUpdateStudent";
-import FormField from "@/components/form/FormField";
-import Input from "@/components/form/Input";
-import Textarea from "@/components/form/Textarea";
-import Select from "@/components/form/Select";
-import DateInput from "@/components/form/Date";
+import GeneralForm from "@/components/form/GeneralForm";
 import useStudent from "../hooks/useStudent";
-import Button from "@/components/Button";
-import { required } from "zod/v4-mini";
+import { useClasses } from "@/features/classes/hooks/useClasses";
+
 
 type Props = {
-  isOpen: boolean;
   onClose: () => void;
   editId: number;
-  initialValues?: Partial<StudentFormValues> & { id?: number };
 };
 
 const defaultValues = {
@@ -31,150 +23,58 @@ const defaultValues = {
   phone: "",
   address: "",
   class_id: null,
-};
+} ;
 
 export default function StudentForm({ onClose, editId }: Props) {
-  const { data: studentData } = useStudent(editId);
-  const {
-    handleSubmit,
-    reset,
-    control,
-    formState: { errors, isSubmitting },
-  } = useForm<StudentFormValues>({
-    resolver: zodResolver(studentSchema),
-    // defaultValues,
+  const {data : classes } =useClasses({});
+  const classOptions = classes?.data?.map((item) =>{
+    return {
+      value: item.id,
+       label: item.name
+      }
   });
 
-  console.log(editId);
+   const studentFormConfig = [
+    { name: "first_name", label: "نام", type: "text", required: true },
+    { name: "last_name", label: "نام خانوادگی", type: "text", required: true },
+    { name: "email", label: "ایمیل", type: "email", required: true },
+    { name: "phone", label: "تلفن", type: "text" },
+    {
+      name: "gender",
+      label: "جنسیت",
+      type: "select",
+      required: true,
+      options: [
+        { value: "male", label: "مرد" },
+        { value: "female", label: "زن" },
+      ],
+    },
+    { name: "date_of_birth", label: "تاریخ تولد", type: "date", required: true },
+    { name: "class_id", label: "کلاس", type: "select", options: classOptions },
+    { name: "address", label: "آدرس", type: "textarea" },
+  ];
+
 
   const createMutation = useCreateStudent();
   const updateMutation = useUpdateStudent();
 
-  useEffect(() => {
-    // When modal opens with initialValues (edit), reset form
-    if (studentData) {
-      reset({
-        ...studentData,
-        date_of_birth: studentData.date_of_birth
-          ? new Date(studentData.date_of_birth)
-          : undefined,
-      });
-    } else {
-      reset(defaultValues);
-    }
-  }, [studentData, reset]);
 
-  const onSubmit = async (data: StudentFormValues) => {
-    console.log(data);
-    const {id, ...rest} = data;
-    // console.log(rest)
-    try {
-      if (editId) {
-        await updateMutation.mutateAsync({
-          id: editId,
-          // date_of_birth: new Date(data?.date_of_birth)
-          payload: data,
-        });
-      } else {
-        await createMutation.mutateAsync(rest);
-      }
-      onClose();
-    } catch (err) {
-      // You can show toast here
-      console.error(err);
-    }
-  };
-  console.log(errors);
   return (
-    <div>
+    <div className="">
       <h2 className="text-lg font-semibold mb-4">
-        {editId ? "Edit Student" : "Add Student"}
+        {editId ? "ویرایش دانش آموز" : "افزودن دانش آموز"}
       </h2>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
-          <FormField
-            name={"first_name"}
-            control={control}
-            component={Input}
-            label="نام"
-            rules={required}
-          />
-          <FormField
-            name={"last_name"}
-            control={control}
-            component={Input}
-            label=" نام خانوادگی "
-            rules={required}
-          />
-          <FormField
-            name={"email"}
-            control={control}
-            component={Input}
-            label="ایمیل"
-            rules={required}
-          />
-          <FormField
-            name={"phone"}
-            control={control}
-            component={Input}
-            label="تلفن"
-          />
-          <FormField
-            name={"class"}
-            control={control}
-            component={Input}
-            label="کلاس"
-          />
-
-          <FormField
-            name={"gender"}
-            control={control}
-            component={Select}
-            label="جنسیت"
-            className=""
-            options={[
-              { value: "male", label: "مرد" },
-              { value: "female", label: "زن" },
-            ]}
-          />
-
-          <FormField
-            name={"address"}
-            control={control}
-            component={Textarea}
-            label="آدرس"
-            className="resize-none"
-          />
-          <FormField
-            name={"date_of_birth"}
-            control={control}
-            component={DateInput}
-            label="تاریخ تولد"
-            className="!dark:bg-dark-2"
-          />
-        </div>
-
-        <div className="flex items-center justify-end gap-3">
-          <Button
-            label="لغو"
-            type="button"
-            onClick={onClose}
-            variant={"outlinePrimary"}
-            shape={"rounded"}
-            // className="px-4 py-2 border rounded"
-          />
-
-          <Button
-            type="submit"
-            label={editId ? "ذخیره" : "افزودن"}
-            className=""
-            variant={"primary"}
-            shape={"rounded"}
-            disabled={isSubmitting}
-          />
-        </div>
-      </form>
+      <GeneralForm
+        config={studentFormConfig}
+        editId={editId}
+        createItem={createMutation}
+        updateItem={updateMutation}
+        onClose={onClose}
+        useGetItem={useStudent}
+        schema={studentSchema}
+        defaultValues={defaultValues}
+      />
     </div>
   );
 }

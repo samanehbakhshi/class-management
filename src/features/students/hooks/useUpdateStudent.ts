@@ -1,4 +1,3 @@
-// src/features/students/hooks/useUpdateStudent.ts
 "use client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateStudentApi } from "../api/updateStudent";

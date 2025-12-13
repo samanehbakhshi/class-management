@@ -20,8 +20,8 @@ export default function Select({
   return (
     <div className="min-w-12">
       <select {...props} className={cn(className, baseClasses)}>
-        <option value={""} >{defaultOPtion}</option>
-        {options.map((opt) => (
+        {defaultOPtion &&<option value={""} >{defaultOPtion}</option>}
+        {options?.map((opt) => (
           <option key={opt.value} value={opt.value}>
             {opt.label}
           </option>

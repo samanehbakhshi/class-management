@@ -4,12 +4,16 @@ export const studentSchema = z.object({
   first_name: z.string().min(1, "لطفا نام را وارد کنید."),
   last_name: z.string().min(1, "لطفا نام خانوادگی را وارد کنید."),
   id: z.union([z.string(), z.number()]).optional(),
-  date_of_birth: z.date().optional(),
+  // date_of_birth: z.date().optional(),
+  date_of_birth: z.preprocess((val) => {
+  if (!val) return undefined;
+  return val instanceof Date ? val : new Date(val);
+}, z.date().optional()),
   gender: z.enum(["male", "female", "other"]).optional(),
   email: z
     .string()
     .min(1, "لطفا ایمیل را وارد کنید.")
-    .email("لطفا ایمیل را درست وارد کنید."),
+    .email({error: "لطفا ایمیل معتبر وارد کنید."}),
   phone: z.string().optional(),
   address: z.string().optional(),
   class_id: z.number().optional().nullable(),

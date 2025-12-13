@@ -2,24 +2,26 @@ import { cn } from "@/lib/utils/cn";
 import React from "react";
 
 export default function TableContainer({
-    children,
+  children,
   className,
   title,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
   className?: string;
   title: string;
 }) {
   return (
     <div
       className={cn(
-        "grid rounded-[10px] bg-white px-7.5 pb-4 pt-7.5 shadow-1 dark:bg-gray-dark dark:shadow-card",
+        "rounded-[10px] bg-white shadow-1 dark:bg-gray-dark dark:shadow-card",
         className
       )}
     >
-      <h2 className="mb-4 text-body-2xlg font-bold text-dark dark:text-white">
-        {title}
-      </h2>
+      <div className="px-6 py-4 sm:px-7 sm:py-5 xl:px-8.5">
+        <h2 className="text-2xl font-bold text-dark dark:text-white">
+          {title}
+        </h2>
+      </div>
       {children}
     </div>
   );

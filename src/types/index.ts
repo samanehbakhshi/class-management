@@ -4,3 +4,4 @@ export interface PaginationProps {
   total: number;
   onPageChange: (newPage: number) => void;
 }
+

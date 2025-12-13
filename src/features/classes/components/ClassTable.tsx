@@ -64,7 +64,7 @@ export default function ClassTable({
       <DataTable
         data={students}
         columns={columns}
-        actions={(row) => (
+        actions={(s) => (
           <>
             <button
               className=" mr-2"

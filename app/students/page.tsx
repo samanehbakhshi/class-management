@@ -45,7 +45,7 @@ export default function StudentsPage() {
   };
 
   console.log(students?.data, students?.total);
-
+console.log(editId)
   // Render UI
   return (
     <div className="p-6 space-y-6">
@@ -54,7 +54,7 @@ export default function StudentsPage() {
       
 
       {/* Search + Filters + Add Button */}
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex md:flex-row flex-col  items-center justify-between gap-4">
         {/* Search */}
         <Input
           type="text"
@@ -68,7 +68,6 @@ export default function StudentsPage() {
         {/* Right actions */}
         <div className="flex items-center gap-3">
           {/* Filters Component */}
-          {/* TODO: Create Filter Component */}
           <StudentsFilters onChange={handleFilterChange} filters={filters} />
 
           {/* Add Button */}
@@ -90,7 +89,6 @@ export default function StudentsPage() {
           {isLoading && <p>Loading...</p>}
           {isError && <p>Error loading students</p>}
 
-          {/* TODO: StudentsTable component */}
           <StudentsTable
             students={students?.data || []}
             isLoading={isLoading}
@@ -109,7 +107,7 @@ export default function StudentsPage() {
           />
         )}
       </TableContainer>
-      {/* TODO: Modal for Add/Edit Student */}
+      {/* Modal for Add/Edit Student */}
       <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
         <StudentForm
           isOpen={isModalOpen}

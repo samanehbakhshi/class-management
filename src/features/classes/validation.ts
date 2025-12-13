@@ -1,18 +1,20 @@
 import { z } from "zod";
 
 export const classSchema = z.object({
-  first_name: z.string().min(1, "لطفا نام را وارد کنید."),
-  last_name: z.string().min(1, "لطفا نام خانوادگی را وارد کنید."),
+  name: z.string().min(1, "لطفا نام کلاس را وارد کنید."),
+  teacher: z.string().min(1, "لطفا نام معلم را وارد کنید."),
   id: z.union([z.string(), z.number()]).optional(),
-  date_of_birth: z.date().optional(),
-  gender: z.enum(["male", "female", "other"]).optional(),
-  email: z
-    .string()
-    .min(1, "لطفا ایمیل را وارد کنید.")
-    .email("لطفا ایمیل را درست وارد کنید."),
-  phone: z.string().optional(),
-  address: z.string().optional(),
-  class_id: z.number().optional().nullable(),
+  grade: z.string().optional(),
+  subject: z.string().min(1, "لطفا موضوع را وارد کنید."),
+  session_count: z.string().optional(),
+  start_date: z.preprocess((val) => {
+    if (!val) return undefined;
+    return val instanceof Date ? val : new Date(val);
+  }, z.date().optional()),
+  start_time: z.preprocess((val) => {
+    if (!val) return undefined;
+    return val instanceof Date ? val : new Date(val);
+  }, z.date().optional()),
 });
 
 export type ClassFormValues = z.infer<typeof classSchema>;
