@@ -7,7 +7,7 @@ export function useDeleteClass() {
   return useMutation({
     mutationFn: (id: number) => deleteClass(id),
     onSuccess: () => {
-      qc.invalidateQueries(["classess"]);
+      qc.invalidateQueries(["classes"]);
       qc.invalidateQueries(["filterOptions"]);
     },
     onError: (err: any) => {

@@ -91,8 +91,8 @@ export default function StudentsTable({
       {confirmOpen && (
         <ConfirmModal
           isOpen={confirmOpen}
-          title="Delete Student"
-          description="Are you sure you want delete this student?"
+          title="حذف دانش آموز"
+          description="آیا از حذف دانش اموز اطمینان دارید؟"
           onCancel={() => setConfirmOpen(false)}
           onConfirm={handleDelete}
         />

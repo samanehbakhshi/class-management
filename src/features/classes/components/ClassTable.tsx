@@ -86,15 +86,15 @@ export default function ClassTable({
         )}
       />
 
-      {confirmOpen && (
-        <ConfirmModal
-          isOpen={confirmOpen}
-          title="Delete Student"
-          description="Are you sure you want delete this student?"
-          onCancel={() => setConfirmOpen(false)}
-          onConfirm={handleDelete}
-        />
-      )}
+            {confirmOpen && (
+              <ConfirmModal
+                isOpen={confirmOpen}
+                title="حذف کلاس"
+                description="آیا از حذف کلاس اطمینان دارید؟"
+                onCancel={() => setConfirmOpen(false)}
+                onConfirm={handleDelete}
+              />
+            )}
     </>
   );
 }
