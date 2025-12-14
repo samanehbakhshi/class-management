@@ -4,6 +4,9 @@ import Button from "@/components/Button";
 import Input from "@/components/form/Input";
 import Modal from "@/components/Modal";
 import TableContainer from "@/components/table/TableContainer";
+import ClassForm from "@/features/classes/components/ClassForm";
+import ClassTable from "@/features/classes/components/ClassTable";
+import { useClasses } from "@/features/classes/hooks/useClasses";
 import StudentForm from "@/features/students/components/StudentForm";
 import StudentsFilters from "@/features/students/components/StudentsFilter";
 import StudentsPagination from "@/features/students/components/StudentsPagination";
@@ -31,7 +34,7 @@ export default function Classes() {
     data: students,
     isLoading,
     isError,
-  } = useStudents({ page, limit, search: debouncedSearch, filters });
+  } = useClasses({ page, limit, search: debouncedSearch, filters });
 
   // Handlers (search, filters...)
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,7 +95,7 @@ export default function Classes() {
           {isError && <p>خطا رخ داده اسست.</p>}
 
           {/* TODO: StudentsTable component */}
-          <StudentsTable
+          <ClassTable
             students={students?.data || []}
             isLoading={isLoading}
             isError={isError}
@@ -112,7 +115,7 @@ export default function Classes() {
       </TableContainer>
       {/* TODO: Modal for Add/Edit Student */}
       <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
-        <StudentForm
+        <ClassForm
           isOpen={isModalOpen}
           onClose={() => setModalOpen(false)}
           editId={editId ?? undefined}
