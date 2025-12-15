@@ -23,6 +23,7 @@ interface GeneralFormProps<TValues> {
   };
   schema: z.ZodSchema<TValues>;
   defaultValues?: TValues;
+  extraCreatePayload?: Partial<TValues>;
 }
 
 export default function GeneralForm<TValues>({
@@ -34,6 +35,7 @@ export default function GeneralForm<TValues>({
   updateItem,
   schema,
   defaultValues,
+  extraCreatePayload,
 }: GeneralFormProps<TValues>) {
   // Fetch existing data when editId exists
   const result = useGetItem(editId);
@@ -56,9 +58,11 @@ export default function GeneralForm<TValues>({
   }, [data, reset]);
 
   const onSubmit = async (values: TValues) => {
-    const {id, ...payload} = values;
+    const {id, ...rest} = values;
+
+    const payload = {...rest, ...extraCreatePayload}
     editId
-      ? await updateItem.mutateAsync({ id: id, payload: payload })
+      ? await updateItem.mutateAsync({ id: id, payload: rest })
       : await createItem.mutateAsync(payload);
     onClose();
   };

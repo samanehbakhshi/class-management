@@ -5,7 +5,7 @@ export const sessionSchema = z.object({
     if (!val) return undefined;
     return val instanceof Date ? val : new Date(val);
   }, z.date().optional()),
-//   status: z.enum(["scheduled", "completed"]).default("scheduled"),
+  // status: z.enum(["scheduled", "completed"]).default("scheduled"),
   start_time: z.string(),
   end_time: z.string(),
 });

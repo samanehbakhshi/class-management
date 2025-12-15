@@ -11,13 +11,13 @@ type Props = {
     onClose: ()=> void;
 }
 
-const defaultValues = {
-  date: undefined,
-  id: undefined,
-  end_time: undefined,
-  start_time: undefined,
-}; 
 export default function SessionForm({onClose , isOpen, classId, editId}: Props) {
+  const defaultValues = {
+    date: undefined,
+    id: undefined,
+    end_time: undefined,
+    start_time: undefined,
+  }; 
   const classFormConfig = [
     
     { name: "date", label: "تایخ ", type: "date", required: true },
@@ -46,6 +46,9 @@ export default function SessionForm({onClose , isOpen, classId, editId}: Props) 
         useGetItem={useClass}
         defaultValues={defaultValues}
         schema={sessionSchema}
+        extraCreatePayload={{
+          class_id: classId!,
+        }}
       />
     </div>
   );
