@@ -25,14 +25,7 @@ const defaultValues = {
 }; 
 
 export default function ClassForm({ onClose, editId }: Props) {
-//   const { data: classData } = useClasses(editId);
-//   const {data : classes } =useClasses({});
-//   const classOptions = classes?.data?.map((item) =>{
-//     return {
-//       value: item.id,
-//        label: item.name
-//       }
-//   });
+
 
 
 
