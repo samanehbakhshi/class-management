@@ -1,4 +1,5 @@
 import DataTable, { Column } from "@/components/table/DataTable";
+import Link from "next/link";
 
 interface SessionsTableProps {
   sessions: any[];
@@ -12,7 +13,18 @@ export default function SessionsTable({ sessions }: SessionsTableProps) {
       { key: "session_count", label: "تعداد جلسات" },
       { key: "end_time", label: "تاریخ شروع" },
       { key: "start_time", label: "زمان شروع" },
-
+      {
+        key: "detail",
+        label: "جزئیات",
+        render: (row) => (
+          <Link
+            href={`/classes/${row.class_id}/sessions/${row.id}/attendance`}
+            className="text-blue-600 hover:underline"
+          >
+            مشاهده جلسه
+          </Link>
+        ),
+      },
     ];
   if (!sessions || sessions.length === 0)
     return <p>No sessions yet.</p>;

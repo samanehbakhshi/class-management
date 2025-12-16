@@ -5,11 +5,11 @@ import Modal from "@/components/Modal";
 import TableContainer from "@/components/table/TableContainer";
 import StudentForm from "@/features/students/components/StudentForm";
 import StudentsFilters from "@/features/students/components/StudentsFilter";
-import StudentsPagination from "@/components/pagination/StudentsPagination";
 import StudentsTable from "@/features/students/components/StudentsTable";
 import useDebounce from "@/features/students/hooks/useDebounce";
 import { useStudents } from "@/features/students/hooks/useStudents";
 import { useState } from "react";
+import Pagination from "@/components/pagination/Pagination";
 const initialPageLimit = 2;
 
 export default function StudentsPage() {
@@ -99,7 +99,7 @@ export default function StudentsPage() {
         </div>
         {/* Pagination */}
         {students?.total && (
-          <StudentsPagination
+          <Pagination
             page={page}
             limit={limit}
             total={students?.total}
