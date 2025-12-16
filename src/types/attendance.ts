@@ -13,6 +13,7 @@ export interface AttendanceRow {
   id: number;
   student_id: number;
   status: AttendanceStatus;
+  note: string;
   students: {
     first_name: string;
     last_name: string;

@@ -4,6 +4,9 @@ import { AttendanceRow } from "@/types/attendance";
 import AttendanceStatusSelect from "./AttendanceStatusSelect";
 import AttendanceStatusBadge from "./AttendanceStatusBadge";
 import { useUpdateAttendanceStatus } from "../hooks/useUpdateAttendanceStatus";
+import { useState } from "react";
+import { updateAttendance } from "../api/updateAttendance";
+import EditableCell from "@/components/table/EditableCell";
 
 interface AttendanceTableProps {
   attendance: AttendanceRow[];
@@ -12,7 +15,21 @@ interface AttendanceTableProps {
 export default function AttendanceTable({
   attendance,
 }: AttendanceTableProps) {
+  const [editingNoteId, setEditingNoteId] = useState<number | null>(null);
+  const [noteValue, setNoteValue] = useState<string>("");
+
   const updateStatusMutation = useUpdateAttendanceStatus();
+  // const handleSaveNote = async (attendanceId: number) => {
+  //   try {
+  //     await updateAttendance(attendanceId, { note: noteValue }); // mutation
+  //     // بعد از ذخیره
+  //     setEditingNoteId(null);
+  //     // می‌توانیم optimistic update انجام دهیم و state attendance را بروز کنیم
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   const columns: Column<AttendanceRow>[] = [
     { key: "id", label: "ردیف", render: (_, index) => index + 1 },
     {
@@ -26,11 +43,25 @@ export default function AttendanceTable({
       label: "وضعیت حضور",
       render: (row) => <AttendanceStatusBadge status={row.status} />,
     },
-    { key: "note", label: "یادداشت" },
     {
       key: "national_id",
       label: "کد ملی",
       render: (row) => row.students.national_id,
+    },
+    {
+      key: "note",
+      label: "یادداشت",
+      render: (row) => (
+        <EditableCell
+          rowId={row.id}
+          value={row.note || ""}
+          onUpdate={(id, newNote) => updateStatusMutation.mutate({id: id, note: newNote})}
+          renderDisplay={(val) => val || "-"}
+          renderEdit={(val, setVal) => (
+            <textarea value={val} onChange={(e) => setVal(e.target.value)} />
+          )}
+        />
+      ),
     },
   ];
 

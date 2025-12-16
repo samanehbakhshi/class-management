@@ -9,6 +9,7 @@ export async function getAttendanceBySessionId(sessionId: number) {
     id,
     status,
     student_id,
+    note,
     students (
       id,
       first_name,

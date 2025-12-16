@@ -9,10 +9,12 @@ export function useUpdateAttendanceStatus() {
     mutationFn: ({
       id,
       status,
+      note,
     }: {
       id: number;
-      status: Partial<{ status: AttendanceStatus }>;
-    }) => updateAttendance(id, status),
+      status?:  AttendanceStatus ;
+      note?: string;
+    }) => updateAttendance(id, {status, note}),
     onSuccess: () => {
       qc.invalidateQueries(["attendance"]);
     },

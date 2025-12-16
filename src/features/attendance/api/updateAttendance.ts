@@ -3,11 +3,11 @@ import { AttendanceStatus } from "@/types/attendance";
 
 export async function updateAttendance(
   id: number,
-  status: Partial<{status: AttendanceStatus}>
+  payload: Partial<{status: AttendanceStatus ; note: string}>
 ) {
   const { data, error } = await supabase
     .from("attendance")
-    .update({"status" : status})
+    .update(payload)
     .eq("id", id)
     .select()
     .maybeSingle();
