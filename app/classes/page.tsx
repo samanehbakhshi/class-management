@@ -1,18 +1,15 @@
-
 "use client";
 import Button from "@/components/Button";
 import Input from "@/components/form/Input";
 import Modal from "@/components/Modal";
+import Pagination from "@/components/pagination/Pagination";
 import TableContainer from "@/components/table/TableContainer";
 import ClassForm from "@/features/classes/components/ClassForm";
 import ClassTable from "@/features/classes/components/ClassTable";
 import { useClasses } from "@/features/classes/hooks/useClasses";
-import StudentForm from "@/features/students/components/StudentForm";
 import StudentsFilters from "@/features/students/components/StudentsFilter";
-import StudentsPagination from "@/features/students/components/StudentsPagination";
-import StudentsTable from "@/features/students/components/StudentsTable";
+
 import useDebounce from "@/features/students/hooks/useDebounce";
-import { useStudents } from "@/features/students/hooks/useStudents";
 import { useState } from "react";
 const initialPageLimit = 2;
 
@@ -105,7 +102,7 @@ export default function Classes() {
         </div>
         {/* Pagination */}
         {students?.total && (
-          <StudentsPagination
+          <Pagination
             page={page}
             limit={limit}
             total={students?.total}

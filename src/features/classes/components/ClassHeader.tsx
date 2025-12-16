@@ -9,7 +9,7 @@ interface ClassHeaderProps {
 
 export default function ClassHeader({ classData }: ClassHeaderProps) {
   return (
-    <div className="border rounded p-4 bg-gray-50">
+    <div className="border rounded p-4 bg-gray-50  dark:bg-dark">
       <h2 className="text-xl font-semibold">{classData.name}</h2>
       <p>معلم: {classData.teacher}</p>
       <p>موضوع: {classData.subject}</p>

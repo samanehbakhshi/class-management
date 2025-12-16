@@ -5,11 +5,11 @@ import Modal from "@/components/Modal";
 import TableContainer from "@/components/table/TableContainer";
 import StudentForm from "@/features/students/components/StudentForm";
 import StudentsFilters from "@/features/students/components/StudentsFilter";
-import StudentsPagination from "@/features/students/components/StudentsPagination";
 import StudentsTable from "@/features/students/components/StudentsTable";
 import useDebounce from "@/features/students/hooks/useDebounce";
 import { useStudents } from "@/features/students/hooks/useStudents";
 import { useState } from "react";
+import Pagination from "@/components/pagination/Pagination";
 const initialPageLimit = 2;
 
 export default function StudentsPage() {
@@ -45,13 +45,12 @@ export default function StudentsPage() {
   };
 
   console.log(students?.data, students?.total);
-console.log(editId)
+  console.log(editId);
   // Render UI
   return (
     <div className="p-6 space-y-6">
       {/* Page Title */}
       <div>دانش آموزان</div>
-      
 
       {/* Search + Filters + Add Button */}
       <div className="flex md:flex-row flex-col  items-center justify-between gap-4">
@@ -77,8 +76,9 @@ console.log(editId)
             variant={"primary"}
             shape={"rounded"}
             // TODO: open modal
-            onClick={() => {setModalOpen(true) 
-              setEditId(null)
+            onClick={() => {
+              setModalOpen(true);
+              setEditId(null);
             }}
           />
         </div>
@@ -99,7 +99,7 @@ console.log(editId)
         </div>
         {/* Pagination */}
         {students?.total && (
-          <StudentsPagination
+          <Pagination
             page={page}
             limit={limit}
             total={students?.total}

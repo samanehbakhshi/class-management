@@ -1,7 +1,8 @@
+"use client";
 import { PaginationProps } from "@/types";
 import React from "react";
 
-export default function StudentsPagination({
+export default function Pagination({
   page,
   limit,
   total,
