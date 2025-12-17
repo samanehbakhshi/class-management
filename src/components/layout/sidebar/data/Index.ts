@@ -53,6 +53,17 @@ export const NAV_DATA = [
           //   },
         ],
       },
+      {
+        title: "کاربران",
+        url: "/users",
+        icon: Icons.User,
+        items: [
+          //   {
+          //     title: "Tables",
+          //     url: "/tables",
+          //   },
+        ],
+      },
       //   {
       //     title: "Pages",
       //     icon: Icons.Alphabet,
