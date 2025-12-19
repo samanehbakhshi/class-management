@@ -12,6 +12,7 @@ import { FormConfig } from "@/types/formTypes";
 import { z } from "zod";
 import Time from "./Time";
 import NumberInput from "./NumberInput";
+import CheckBox from "./CheckBox";
 interface GeneralFormProps<TValues> {
   config: FormConfig;
   useGetItem: (id: number | null) => { data?: TValues } | void;
@@ -50,6 +51,7 @@ export default function GeneralForm<TValues>({
     resolver: zodResolver(schema),
     defaultValues,
   });
+  console.log(errors)
 
   useEffect(() => {
     if (data) {
@@ -82,9 +84,11 @@ export default function GeneralForm<TValues>({
                 : field.type === "date"
                 ? DateInput
                 : field.type === "time"
-                ? Time 
-                :field.type === "number"
+                ? Time
+                : field.type === "number"
                 ? NumberInput
+                : field.type === "checkbox"
+                ? CheckBox
                 : Input
             }
             label={field.label}

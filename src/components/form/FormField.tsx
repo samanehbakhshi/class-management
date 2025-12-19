@@ -23,7 +23,6 @@ export default function FormField({
   className,
   ...rest
 }: FormFieldProps) {
-  console.log(rules)
   return (
     <div>
       {label && <label className="block mb-1">{rules && <span className="text-red-600 text-md">*</span>}{label}</label>}
@@ -45,6 +44,7 @@ export default function FormField({
                 // اگر date picker است، ببین val چی هست
                 field.onChange(val);
               }}
+              checked={field.value}
             />
             {fieldState.error && (
               <p className="text-red-500 text-sm mt-1">

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ClassFormValues } from "../validation";
+import {  UserFormValues } from "../validation";
 import { updateUser } from "../api/updateUser";
 
 export function useUpdateUser() {
@@ -11,7 +11,7 @@ export function useUpdateUser() {
       payload,
     }: {
       id: number;
-      payload: Partial<ClassFormValues>;
+      payload: Partial<UserFormValues>;
     }) => updateUser(id, payload),
     onSuccess: () => {
       qc.invalidateQueries(["users"]);

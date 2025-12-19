@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils/cn";
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import UserForm from "./UserForm";
+import useDeleteUser from "../hooks/useDeleteUser";
 
 interface UsersTableProps {
   users: Student[];
@@ -64,7 +65,7 @@ export default function UsersTable({
   isError,
   isLoading,
 }: UsersTableProps) {
-  // const { mutate: removeStudent, isPending } = useDeleteClass();
+  const { mutate: removeStudent, isPending } = useDeleteUser();
   // Local States
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -77,15 +78,15 @@ export default function UsersTable({
   };
   const handleDelete = () => {
     if (!selectedId) return;
-    // removeStudent(selectedId, {
-    //   onSuccess: () => {
-    //     toast.success("Student deleted successfully");
-    //   },
-    //   onError: () => {
-    //     toast.error("Failed to delete student");
-    //   },
-    // });
-    // setConfirmOpen(false);
+    removeStudent(selectedId, {
+      onSuccess: () => {
+        toast.success("کاربر با موفقیت حذف شد.");
+      },
+      onError: () => {
+        toast.error("حذف کاربر با خظا مواجه شد!");
+      },
+    });
+    setConfirmOpen(false);
   };
 
   if (isLoading) return <p>Loading...</p>;
@@ -146,7 +147,7 @@ export default function UsersTable({
         <ConfirmModal
           isOpen={confirmOpen}
           title="حذف کلاس"
-          description="آیا از حذف کلاس اطمینان دارید؟"
+          description="آیا از حذف کاربر اطمینان دارید؟"
           onCancel={() => setConfirmOpen(false)}
           onConfirm={handleDelete}
         />
