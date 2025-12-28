@@ -4,17 +4,23 @@ import { useState } from "react";
 import { useUsers } from "../hooks/useUsers";
 import UsersTable from "./UsersTable";
 import Pagination from "@/components/pagination/Pagination";
+type UserClientProps = {
+  initialData: {data: [], total: number};
+  initialPage : number;
+  limit: number;
 
-export default function UsersClient({ initialData, initialPage, limit }) {
+}
+export default function UsersClient({ initialData, initialPage, limit }: UserClientProps) {
   const [page, setPage] = useState(initialPage);
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({});
-
+ 
   const { data, isLoading, isError } = useUsers({
     page,
     limit,
     search,
     filters,
+    initialData,
   });
   console.log(data?.data)
 

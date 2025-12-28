@@ -11,6 +11,11 @@ export default async function page({
 }) {
 
   const user = await getCurrentUser();
+  if(!user) redirect("/auth/login")
+
+    if (user.role !== "admin"){
+      redirect("/unauthorized")
+    }
 
   const page =  Number(await searchParams.page ?? 1);
   const limit = 10;
@@ -22,13 +27,8 @@ export default async function page({
     filters: {},
   });
 
-  console.log(user)
+  console.log(user, initialData)
 
-  if(!user) redirect("/auth/login")
-
-    if (user.role !== "admin"){
-      redirect("/unauthorized")
-    }
   return (
     <UsersClient initialData={initialData} initialPage={page} limit={limit} />
   );

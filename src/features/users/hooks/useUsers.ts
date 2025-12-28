@@ -1,13 +1,26 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import {  GetUsersParams } from "../types";
+import { GetUsersParams } from "../types";
 import { getUsers } from "../api/getUsers";
+import { User } from "@/types/user";
 
-export function useUsers(params: GetUsersParams) {
-  const { page, limit, search, filters } = params;
+interface UseUsersParams extends GetUsersParams {
+  initialData?: {
+    data: User[];
+    total: number;
+  };
+}
+export function useUsers({
+  page = 1,
+  limit = 10,
+  search = "",
+  filters = {},
+  initialData,
+}: UseUsersParams) {
   return useQuery({
-    queryKey: ["users", page, limit, search, filters],
-    queryFn: () => getUsers(params),
-    staleTime: 1000 * 60,
+    queryKey: ["users", { page, search, filters }],
+    queryFn: () => getUsers({ page, limit, search, filters }),
+    initialData,
+    keepPreviousData: true,
   });
 }
