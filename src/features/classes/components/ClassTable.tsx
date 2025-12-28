@@ -6,6 +6,7 @@ import { PencilSquareIcon, TrashIcon, XIcon } from "@/assets/icon/Icons";
 import DataTable, { Column } from "@/components/table/DataTable";
 import { useDeleteClass } from "../hooks/useDeleteClass";
 import Link from "next/link";
+import RequireRole from "@/components/auth/RequireRole";
 
 interface StudentTableProps {
   students: Student[];
@@ -88,26 +89,28 @@ export default function ClassTable({
             >
               <PencilSquareIcon />
             </button>
-            <button
-              className="text-red-400 mr-1"
-              onClick={() => handleConfrim(s.id)}
-              disabled={isPending}
-            >
-              <TrashIcon />
-            </button>
+            <RequireRole role="admin">
+              <button
+                className="text-red-400 mr-1"
+                onClick={() => handleConfrim(s.id)}
+                disabled={isPending}
+              >
+                <TrashIcon />
+              </button>
+            </RequireRole>
           </>
         )}
       />
 
-            {confirmOpen && (
-              <ConfirmModal
-                isOpen={confirmOpen}
-                title="حذف کلاس"
-                description="آیا از حذف کلاس اطمینان دارید؟"
-                onCancel={() => setConfirmOpen(false)}
-                onConfirm={handleDelete}
-              />
-            )}
+      {confirmOpen && (
+        <ConfirmModal
+          isOpen={confirmOpen}
+          title="حذف کلاس"
+          description="آیا از حذف کلاس اطمینان دارید؟"
+          onCancel={() => setConfirmOpen(false)}
+          onConfirm={handleDelete}
+        />
+      )}
     </>
   );
 }
