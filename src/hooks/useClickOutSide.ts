@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 
-export default function useClickOutSide(
-  ref: React.RefObject<HTMLElement>,
+export default function useClickOutSide<T extends HTMLElement>(
   handler: (event: MouseEvent | TouchEvent) => void
 ) {
+
+  const ref = useRef<T>(null);
   useEffect(() => {
     function listener(event: MouseEvent | TouchEvent) {
       if (!ref.current) return;
@@ -23,4 +24,6 @@ export default function useClickOutSide(
       document.removeEventListener("touchstart", listener);
     };
   }, [ref, handler]);
+
+  return ref
 }

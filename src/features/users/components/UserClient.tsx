@@ -4,8 +4,17 @@ import { useState } from "react";
 import { useUsers } from "../hooks/useUsers";
 import UsersTable from "./UsersTable";
 import Pagination from "@/components/pagination/Pagination";
-
-export default function UsersClient({ initialData, initialPage, limit }) {
+import RequireRole from "@/components/auth/RequireRole";
+type UserClientProps = {
+  initialData: { data: []; total: number };
+  initialPage: number;
+  limit: number;
+};
+export default function UsersClient({
+  initialData,
+  initialPage,
+  limit,
+}: UserClientProps) {
   const [page, setPage] = useState(initialPage);
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({});
@@ -15,23 +24,26 @@ export default function UsersClient({ initialData, initialPage, limit }) {
     limit,
     search,
     filters,
+    initialData,
   });
-  console.log(data?.data)
+  console.log(data?.data);
 
   return (
     <div className="space-y-4">
-      <UsersTable
-        users={data?.data ?? []}
-        isLoading={isLoading}
-        isError={isError}
-      />
+      <RequireRole role="admin">
+        <UsersTable
+          users={data?.data ?? []}
+          isLoading={isLoading}
+          isError={isError}
+        />
 
       <Pagination
         page={page}
         total={data?.total ?? 0}
         limit={limit}
         onPageChange={setPage}
-      />
+        />
+        </RequireRole>
     </div>
   );
 }

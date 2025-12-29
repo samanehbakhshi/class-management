@@ -46,18 +46,7 @@ const columns: Column<User>[] = [
       );
     },
   },
-  {
-    key: "detail",
-    label: "جزئیات",
-    render: (row) => (
-      <Link
-        href={`/classes/${row.id}`}
-        className="text-blue-600 hover:underline"
-      >
-        مشاهده جلسات
-      </Link>
-    ),
-  },
+
 ];
 
 export default function UsersTable({
@@ -113,7 +102,7 @@ export default function UsersTable({
         data={users}
         columns={columns}
         actions={(s) => (
-          <>
+          <div className="flex gap-2">
             <button
               className=" mr-2"
               onClick={() => {
@@ -130,7 +119,7 @@ export default function UsersTable({
             >
               <TrashIcon />
             </button>
-          </>
+          </div>
         )}
       />
 

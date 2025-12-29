@@ -1,5 +1,6 @@
 "use client";
 
+import RequireRole from "@/components/auth/RequireRole";
 import AttendanceTable from "@/features/attendance/components/AttendanceTable";
 import { useAttendanceBySession } from "@/features/attendance/hooks/useAttendanceBySession";
 import { AttendanceRow } from "@/types/attendance";
@@ -18,8 +19,8 @@ export default function AttendanceClient({
   );
 
   return (
-    <AttendanceTable
-      attendance={attendance}
-    />
+    <RequireRole roles={["admin", "teacher"]}>
+      <AttendanceTable attendance={attendance} />
+    </RequireRole>
   );
 }
