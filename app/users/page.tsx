@@ -3,6 +3,7 @@ import UsersClient from "@/features/users/components/UserClient";
 import React from "react";
 import { getCurrentUser } from "../lib/auth/getCurrentUser";
 import { redirect } from "next/navigation";
+import { getUsersServer } from "@/features/users/api/getUsersServer";
 
 export default async function page({
   searchParams,
@@ -20,7 +21,7 @@ export default async function page({
   const page =  Number(await searchParams.page ?? 1);
   const limit = 10;
 
-  const initialData = await getUsers({
+  const initialData = await getUsersServer({
     page,
     limit,
     search: "",

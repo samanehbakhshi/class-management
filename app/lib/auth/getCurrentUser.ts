@@ -14,6 +14,7 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
   // ۱. گرفتن user safely
   const userResponse = await supabase.auth.getUser();
   const user = userResponse.data?.user;
+  console.log(userResponse)
 
   if (!user) return null;
 

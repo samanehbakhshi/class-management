@@ -27,6 +27,8 @@ export async function middleware(req: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  console.log(user?.app_metadata)
+
 
   const pathname = req.nextUrl.pathname;
 console.log("USER:", user?.email, "PATH:", pathname);
