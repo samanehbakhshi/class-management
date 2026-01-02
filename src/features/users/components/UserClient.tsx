@@ -19,27 +19,27 @@ export default function UsersClient({
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({});
 
-  const { data, isLoading, isError } = useUsers({
-    page,
-    limit,
-    search,
-    filters,
-    initialData,
-  });
-  console.log(data?.data);
+  // const { data, isLoading, isError } = useUsers({
+  //   page,
+  //   limit,
+  //   search,
+  //   filters,
+  //   initialData,
+  // });
+  // console.log(data?.data);
 
   return (
     <div className="space-y-4">
       <RequireRole role="admin">
         <UsersTable
-          users={data?.data ?? []}
-          isLoading={isLoading}
-          isError={isError}
+          users={initialData.data ?? []}
+          isLoading={false}
+          isError={false}
         />
 
       <Pagination
         page={page}
-        total={data?.total ?? 0}
+        total={initialData?.total ?? 0}
         limit={limit}
         onPageChange={setPage}
         />

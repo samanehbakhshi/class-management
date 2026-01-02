@@ -10,26 +10,26 @@ import { User } from "@/types/user";
 import { cn } from "@/lib/utils/cn";
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
-import UserForm from "./UserForm";
-import useDeleteUser from "../hooks/useDeleteUser";
+import useDeleteUser from "@/features/users/hooks/useDeleteUser";
+import UserForm from "@/features/users/components/UserForm";
 
 interface UsersTableProps {
   users: Student[];
   isError: boolean;
   isLoading: boolean;
-  // setModalOpen: (open: boolean) => void;
-  // setEditId: (studentId: number | null) => void;
+  setModalOpen: (open: boolean) => void;
+  setEditId: (studentId: number | null) => void;
 }
 
 const columns: Column<User>[] = [
   { key: "id", label: "ردیف", render: (_, index) => index + 1 },
   {
     key: "first_name",
-    label: "کلاس",
+    label: "نام",
     render: (data) => data.first_name + data.last_name,
   },
-  { key: "role", label: "عنوان" },
-  { key: "email", label: "نمره" },
+//   { key: "role", label: "عنوان" },
+  { key: "email", label: "ایمیل" },
   {
     key: "is_active",
     label: "فعال بودن",
@@ -49,17 +49,17 @@ const columns: Column<User>[] = [
 
 ];
 
-export default function UsersTable({
+export default function TeachersTable({
   users,
   isError,
   isLoading,
+  setModalOpen,
+  setEditId,
 }: UsersTableProps) {
   const { mutate: removeStudent, isPending } = useDeleteUser();
   // Local States
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [editId, setEditId] = useState<number | null>(null);
   // Event Hanlders
   const handleConfrim = (id: number) => {
     setSelectedId(id);
@@ -69,10 +69,10 @@ export default function UsersTable({
     if (!selectedId) return;
     removeStudent(selectedId, {
       onSuccess: () => {
-        toast.success("کاربر با موفقیت حذف شد.");
+        toast.success("معلم با موفقیت حذف شد.");
       },
       onError: () => {
-        toast.error("حذف کاربر با خظا مواجه شد!");
+        toast.error("حذف معلم با خظا مواجه شد!");
       },
     });
     setConfirmOpen(false);
@@ -82,22 +82,10 @@ export default function UsersTable({
   if (isError) return <p>Something went wrong!</p>;
   console.log(users);
 
-  if (!users || users.length === 0) return <p>No users found.</p>;
+  if (!users || users.length === 0) return <p>No classes found.</p>;
 
   return (
     <>
-      {/* Add Button */}
-      <Button
-        label="افزودن"
-        className=""
-        variant={"primary"}
-        shape={"rounded"}
-        // TODO: open modal
-        onClick={() => {
-          setIsModalOpen(true);
-          setEditId(null);
-        }}
-      />
       <DataTable
         data={users}
         columns={columns}
@@ -107,7 +95,7 @@ export default function UsersTable({
               className=" mr-2"
               onClick={() => {
                 setEditId(s.id);
-                setIsModalOpen(true);
+                setModalOpen(true);
               }}
             >
               <PencilSquareIcon />
@@ -123,20 +111,11 @@ export default function UsersTable({
         )}
       />
 
-      {/*  Modal for Add/Edit User */}
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <UserForm
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          editId={editId ?? undefined}
-        />
-      </Modal>
-
       {confirmOpen && (
         <ConfirmModal
           isOpen={confirmOpen}
-          title="حذف کلاس"
-          description="آیا از حذف کاربر اطمینان دارید؟"
+          title="حذف معلم"
+          description="آیا از حذف معلم اطمینان دارید؟"
           onCancel={() => setConfirmOpen(false)}
           onConfirm={handleDelete}
         />
