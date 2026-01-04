@@ -35,7 +35,7 @@ export default function TeacherClient({ initialData, initialPage, limit }: UserC
     filters,
     initialData,
   });
-  console.log(data?.data);
+
 
   // Handlers (search, filters...)
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +63,7 @@ export default function TeacherClient({ initialData, initialPage, limit }: UserC
             value={search}
             disabled={isLoading}
             onChange={handleSearchChange}
-            className="border px-3 py-2 rounded w-64 disabled:bg-gray-200"
+            className="border px-3 py-3  w-64"
           />
 
           {/* Right actions */}

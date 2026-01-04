@@ -71,7 +71,7 @@ export default function ClassTable({
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
 
-  if (!students || students.length === 0) return <p>No classes found.</p>;
+  if (!students || students.length === 0) return <p className="text-gray-7 dark:text-gray-2 p-2">کلاس یافت نشد!</p>;
 
   return (
     <>

@@ -16,7 +16,7 @@ export default async function page({
     limit,
   });
 
-  console.log(initialData);
+
   return (
     <>
       <TeacherClient

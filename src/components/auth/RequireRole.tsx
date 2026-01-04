@@ -11,7 +11,7 @@ interface Props {
 
 export default function RequireRole({ role, roles, children }: Props) {
   const  user  = useAuth();
-console.log(user?.role !== role, children)
+
   if (role && user?.role !== role)  return null;
   
 

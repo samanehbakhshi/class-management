@@ -13,13 +13,14 @@ import { ChevronUpIcon } from "@/assets/icon/Icons";
 import { cn } from "@/lib/utils/cn";
 import LogoutButton from "@/components/logOut/logOutButton";
 import { useAuth } from "@/lib/providers/AuthProvider";
+
 export function UserInfo() {
   const [isOpen, setIsOpen] = useState(false);
-const user = useAuth()
-console.log(user)
+  const user = useAuth();
 
+  const Img = "/images/user/user-01.png";
   if (!user) {
-    return <span>Guest</span>;
+    return <span>مهمان</span>;
   }
 
   return (
@@ -28,14 +29,16 @@ console.log(user)
         <span className="sr-only">My Account</span>
 
         <figure className="flex items-center gap-3">
-          {/* <Image
-            src={user.img}
+          <Image
+            src={Img}
             className="size-12"
             alt={`Avatar of ${user.email}`}
             role="presentation"
             width={200}
             height={200}
-          /> */}
+            priority
+            unoptimized
+          />
           <figcaption className="flex items-center gap-1 font-medium text-dark dark:text-dark-6 max-[1024px]:sr-only">
             <span>{user.email}</span>
 
@@ -58,14 +61,16 @@ console.log(user)
         <h2 className="sr-only">اطلاعات کاربر</h2>
 
         <figure className="flex items-center gap-2.5 px-5 py-3.5">
-          {/* <Image
-            src={user.img}
+          <Image
+            src={Img}
             className="size-12"
             alt={`Avatar for ${user.email}`}
             role="presentation"
             width={200}
             height={200}
-          /> */}
+            unoptimized
+            priority
+          />
 
           <figcaption className="space-y-1 text-base font-medium">
             <div className="mb-2 leading-none text-dark dark:text-white">

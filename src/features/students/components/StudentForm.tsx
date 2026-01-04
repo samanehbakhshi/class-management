@@ -7,7 +7,6 @@ import GeneralForm from "@/components/form/GeneralForm";
 import useStudent from "../hooks/useStudent";
 import { useClasses } from "@/features/classes/hooks/useClasses";
 
-
 type Props = {
   onClose: () => void;
   editId: number;
@@ -23,18 +22,18 @@ const defaultValues = {
   phone: "",
   address: "",
   class_id: null,
-} ;
+};
 
 export default function StudentForm({ onClose, editId }: Props) {
-  const {data : classes } =useClasses({});
-  const classOptions = classes?.data?.map((item) =>{
+  const { data: classes } = useClasses({});
+  const classOptions = classes?.data?.map((item) => {
     return {
       value: Number(item.id),
-       label: item.name
-      }
+      label: item.name,
+    };
   });
 
-   const studentFormConfig = [
+  const studentFormConfig = [
     { name: "first_name", label: "نام", type: "text", required: true },
     { name: "last_name", label: "نام خانوادگی", type: "text", required: true },
     { name: "email", label: "ایمیل", type: "email", required: true },
@@ -49,19 +48,22 @@ export default function StudentForm({ onClose, editId }: Props) {
         { value: "female", label: "زن" },
       ],
     },
-    { name: "date_of_birth", label: "تاریخ تولد", type: "date", required: true },
+    {
+      name: "date_of_birth",
+      label: "تاریخ تولد",
+      type: "date",
+      required: true,
+    },
     { name: "class_id", label: "کلاس", type: "select", options: classOptions },
     { name: "address", label: "آدرس", type: "textarea" },
   ];
 
-
   const createMutation = useCreateStudent();
   const updateMutation = useUpdateStudent();
 
-
   return (
     <div className="">
-      <h2 className="text-lg font-semibold mb-4">
+      <h2 className="text-lg font-semibold mb-4 text-gray-7 dark:text-gray-3">
         {editId ? "ویرایش دانش آموز" : "افزودن دانش آموز"}
       </h2>
 

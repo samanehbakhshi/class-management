@@ -11,7 +11,7 @@ export type Column<T> = {
   key: keyof T | string;
   label: string;
   width?: string;
-  render?: (row: T) => React.ReactNode;
+  render?: (row: T, index: number) => React.ReactNode;
 };
 
 interface DataTableProps<T> {
@@ -40,7 +40,7 @@ export default function DataTable<T>({
           <TableRow key={index}>
             {columns.map((col) => (
               <TableCell key={col.key.toString()}>
-                {col.render ? col.render(row) : (row as any)[col.key]}
+                {col.render ? col.render(row, index) : (row as any)[col.key]}
               </TableCell>
             ))}
 

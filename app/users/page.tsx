@@ -10,7 +10,7 @@ export default async function page({
 }: {
   searchParams: { page?: string };
 }) {
-
+  const { page: pageParam } = await searchParams;
   const user = await getCurrentUser();
   if(!user) redirect("/auth/login")
 
@@ -18,7 +18,7 @@ export default async function page({
       redirect("/unauthorized")
     }
 
-  const page =  Number(await searchParams.page ?? 1);
+  const page =  Number(pageParam ?? 1);
   const limit = 10;
 
   const initialData = await getUsersServer({
@@ -28,7 +28,7 @@ export default async function page({
     filters: {},
   });
 
-  console.log(user, initialData)
+
 
   return (
     <UsersClient initialData={initialData} initialPage={page} limit={limit} />

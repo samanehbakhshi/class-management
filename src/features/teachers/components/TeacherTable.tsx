@@ -80,9 +80,9 @@ export default function TeachersTable({
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
-  console.log(users);
 
-  if (!users || users.length === 0) return <p>No classes found.</p>;
+
+  if (!users || users.length === 0) return <p className="text-gray-7 dark:text-gray-2 p-2">معلم یافت نشد!</p>;
 
   return (
     <>

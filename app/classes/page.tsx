@@ -45,7 +45,7 @@ export default function Classes() {
     setPage(1);
   };
 
-  console.log(students?.data, students?.total);
+
 
   // Render UI
   return (
@@ -54,7 +54,7 @@ export default function Classes() {
       <div>کلاس ها </div>
 
       {/* Search + Filters + Add Button */}
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex md:flex-row flex-col  items-center justify-between gap-4">
         {/* Search */}
         <Input
           type="text"
@@ -62,7 +62,7 @@ export default function Classes() {
           value={search}
           disabled={isLoading}
           onChange={handleSearchChange}
-          className="border px-3 py-2 rounded w-64 disabled:bg-gray-200"
+          className="border px-3 py-3  w-64 "
         />
 
         {/* Right actions */}

@@ -19,14 +19,6 @@ export default function UsersClient({
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState({});
 
-  // const { data, isLoading, isError } = useUsers({
-  //   page,
-  //   limit,
-  //   search,
-  //   filters,
-  //   initialData,
-  // });
-  // console.log(data?.data);
 
   return (
     <div className="space-y-4">

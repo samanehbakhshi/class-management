@@ -6,7 +6,6 @@ export async function getAttendances(): Promise<Attendance[]> {
     .from("attendance")
     .select("*");
   if (error) {
-    console.error(error);
     throw new Error(error.message);
   }
   return attendance;

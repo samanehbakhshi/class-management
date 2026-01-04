@@ -18,10 +18,9 @@ const defaultValues = {
   role: "",
   email: "",
   isActive: true,
-}
+};
 
 export default function UserForm({ onClose, editId }: Props) {
-  //   console.log(classOptions)
   const { data: roleList } = useUserRole();
 
   const roleLables = (role: string) => {
@@ -30,12 +29,12 @@ export default function UserForm({ onClose, editId }: Props) {
     if (role === "admin") return "ادمین";
   };
 
-    const roleOptions = roleList?.map((item) => {
-      return {
-        value: item.role,
-        label: roleLables(item.role),
-      };
-    });
+  const roleOptions = roleList?.map((item) => {
+    return {
+      value: item.role,
+      label: roleLables(item.role),
+    };
+  });
 
   const classFormConfig = [
     { name: "first_name", label: "نام", type: "text", required: true },
@@ -49,13 +48,12 @@ export default function UserForm({ onClose, editId }: Props) {
       required: true,
     },
   ];
-console.log(roleOptions, roleList)
   const createMutation = useCreateUser();
   const updateMutation = useUpdateUser();
 
   return (
     <div>
-      <h2 className="text-lg font-semibold mb-4">
+      <h2 className="text-lg font-semibold mb-4 text-gray-7 dark:text-gray-3">
         {editId ? "ویرایش کاربر" : "افزودن کاربر"}
       </h2>
 

@@ -44,13 +44,12 @@ export default function StudentsPage() {
     setPage(1);
   };
 
-  console.log(students?.data, students?.total);
-  console.log(editId);
+
   // Render UI
   return (
     <div className="p-6 space-y-6">
       {/* Page Title */}
-      <div>دانش آموزان</div>
+      <div className="text-gray-7 dark:text-gray-2">دانش آموزان</div>
 
       {/* Search + Filters + Add Button */}
       <div className="flex md:flex-row flex-col  items-center justify-between gap-4">
@@ -61,7 +60,7 @@ export default function StudentsPage() {
           value={search}
           disabled={isLoading}
           onChange={handleSearchChange}
-          className="border px-3 py-2 rounded w-64 disabled:bg-gray-200"
+          className="border px-3 py-3   w-64 "
         />
 
         {/* Right actions */}
@@ -98,7 +97,7 @@ export default function StudentsPage() {
           />
         </div>
         {/* Pagination */}
-        {students?.total && (
+        {students?.total > 0  && (
           <Pagination
             page={page}
             limit={limit}

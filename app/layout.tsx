@@ -29,10 +29,8 @@ export default async function RootLayout({
 }>) {
 
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" suppressHydrationWarning>
+      <body className={`  `}>
         <Providers>
           <div className="flex min-h-screen">
             <Sidebar />

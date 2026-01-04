@@ -27,7 +27,7 @@ export default function SessionsTable({ sessions }: SessionsTableProps) {
       },
     ];
   if (!sessions || sessions.length === 0)
-    return <p>No sessions yet.</p>;
+    return <p className="text-gray-7 dark:text-gray-2 p-2">جلسه‌ای یافت نشد.</p>;
 
   return(
       <DataTable

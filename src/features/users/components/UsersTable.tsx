@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { Student } from "@/types/student";
 import ConfirmModal from "@/components/ConfirmModal";
 import toast from "react-hot-toast";
-import { PencilSquareIcon, TrashIcon, XIcon } from "@/assets/icon/Icons";
+import { PencilSquareIcon, TrashIcon } from "@/assets/icon/Icons";
 import DataTable, { Column } from "@/components/table/DataTable";
-// import { useDeleteClass } from "../hooks/useDeleteClass";
-import Link from "next/link";
 import { User } from "@/types/user";
 import { cn } from "@/lib/utils/cn";
 import Button from "@/components/Button";
@@ -80,7 +78,6 @@ export default function UsersTable({
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
-  console.log(users);
 
   if (!users || users.length === 0) return <p>No users found.</p>;
 
