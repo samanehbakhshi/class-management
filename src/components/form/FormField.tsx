@@ -25,7 +25,12 @@ export default function FormField({
 }: FormFieldProps) {
   return (
     <div>
-      {label && <label className="block mb-1">{rules && <span className="text-red-600 text-md">*</span>}{label}</label>}
+      {label && (
+        <label className="block mb-1 text-gray-6 dark:text-gray-3">
+          {rules && <span className="text-red-600 text-md">*</span>}
+          {label}
+        </label>
+      )}
       <Controller
         name={name}
         control={control}
@@ -40,8 +45,6 @@ export default function FormField({
               error={fieldState.error?.message}
               className={className}
               onChange={(val: any) => {
-                console.log("[Component->onChange]", name, "val:", val, );
-                // اگر date picker است، ببین val چی هست
                 field.onChange(val);
               }}
               checked={field.value}

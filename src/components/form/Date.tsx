@@ -21,9 +21,8 @@ export default function DateInput({
   onChange,
   ...props
 }: DateProps) {
-  console.log(props)
   const baseClasses = cn(
-    " w-full rounded-[7px] dark:bg-dark border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal outline-none transition focus:border-primary active:border-primary dark:border-dark-3 dark:bg-dark-2 dark:focus:border-primary flatpickr-input active",
+    " w-full rounded-[7px] dark:bg-dark border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-gray-6 dark:text-gray-3 outline-none transition focus:border-primary active:border-primary dark:border-dark-3 dark:bg-dark-2 dark:focus:border-primary flatpickr-input active",
     className
   );
   return (

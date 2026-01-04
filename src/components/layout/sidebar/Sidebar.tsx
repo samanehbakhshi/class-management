@@ -49,8 +49,8 @@ export default function Sidebar() {
                 onClick={toggleSidebar}
                 className="absolute left-3/4 right-4.5 top-1/2 -translate-y-1/2 text-right"
               >
-                <span className="sr-only">close menu</span>
-                <ArrowLeftIcon className="ml-auto size-7" />
+                <span className="sr-only">بستن منو</span>
+                <ArrowLeftIcon className="ml-auto text-gray-7 dark:text-gray-3  size-7" />
               </button>
             )}
           </div>

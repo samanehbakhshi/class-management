@@ -51,7 +51,7 @@ export default function GeneralForm<TValues>({
     resolver: zodResolver(schema),
     defaultValues,
   });
-  console.log(errors)
+
 
   useEffect(() => {
     if (data) {

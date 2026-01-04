@@ -57,7 +57,7 @@ export default function StudentsTable({
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
 
-  if (!students || students.length === 0) return <p>No students found.</p>;
+  if (!students || students.length === 0) return <p className="text-gray-7 dark:text-gray-2 p-2">دانش آموزی یافت نشد!</p>;
 
  
 
@@ -87,7 +87,7 @@ export default function StudentsTable({
           </>
         )}
       />
-\
+
       {confirmOpen && (
         <ConfirmModal
           isOpen={confirmOpen}

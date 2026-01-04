@@ -16,7 +16,7 @@ export default function Select({
   ...props
 }: SelectProps) {
   const baseClasses =
-    "w-full  rounded-lg border border-stroke bg-transparent px-2 py-4 outline-none transition focus:border-primary active:border-primary dark:border-dark-3 dark:bg-dark-2 dark:focus:border-primary [&>option]:text-dark-5 dark:[&>option]:text-dark-6 pl-1.5";
+    "w-full  rounded-lg border border-stroke bg-white text-gray-6 dark:text-gray-3 px-2 py-3 outline-none transition focus:border-primary active:border-primary dark:border-dark-3 dark:bg-dark-2 dark:focus:border-primary [&>option]:text-dark-5 dark:[&>option]:text-dark-6 pl-1.5";
   return (
     <div className="min-w-12">
       <select {...props} className={cn(className, baseClasses)}>

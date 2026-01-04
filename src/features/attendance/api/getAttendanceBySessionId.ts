@@ -23,6 +23,5 @@ export async function getAttendanceBySessionId(sessionId: number) {
     console.error(error);
     throw new Error(error.message);
   }
-  console.log(attendance);
   return attendance ?? [];
 }

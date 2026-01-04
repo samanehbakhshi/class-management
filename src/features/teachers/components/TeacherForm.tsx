@@ -17,11 +17,9 @@ const defaultValues = {
   role: "",
   email: "",
   isActive: true,
-}
+};
 
 export default function TeacherForm({ onClose, editId }: Props) {
-
-
   const classFormConfig = [
     { name: "first_name", label: "نام", type: "text", required: true },
     { name: "last_name", label: "نام خانوادگی", type: "text", required: true },
@@ -38,7 +36,7 @@ export default function TeacherForm({ onClose, editId }: Props) {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold mb-4">
+      <h2 className="text-lg font-semibold mb-4 text-gray-7 dark:text-gray-3">
         {editId ? "ویرایش معلم" : "افزودن معلم"}
       </h2>
 

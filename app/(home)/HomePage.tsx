@@ -8,7 +8,6 @@ export default function HomePage() {
   useEffect(() => {
     const fetchStudents = async () => {
       const data = await getStudents();
-      console.log(data);
       setStudents(data as Student[]);
     };
     fetchStudents();

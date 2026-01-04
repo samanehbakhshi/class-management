@@ -17,7 +17,6 @@ export default function ClassSessionsClient({ classId }: Props) {
     isLoading,
     isError,
   } = useSessions({ classId, page, limit });
-console.log(classId)
   return (
     <div>
       <h1>جزئیات کلاس</h1>

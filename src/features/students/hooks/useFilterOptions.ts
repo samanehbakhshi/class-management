@@ -15,7 +15,7 @@ export function useFilterOptions() {
     queryFn: getDistinctCities,
     staleTime: 1000 * 60 * 5,
   });
-  console.log(classQuery)
+
 
   return {
     classes: classQuery.data ?? [],

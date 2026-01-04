@@ -4,7 +4,7 @@ export async function getClasses() {
   const { data: classes, error } = await supabase.from("classes").select("*");
 
   if (error) {
-    console.log(error.message);
+    console.error(error.message);
     throw new Error(error.message);
   }
   return classes;

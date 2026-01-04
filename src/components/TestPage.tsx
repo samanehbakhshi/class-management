@@ -6,7 +6,7 @@ export default async function TestPage() {
 
   const { data, error } = await supabase.rpc("get_uid_test");
 
-  console.log("dddddd",data, error);
+
 
   return <div>Check server log</div>;
 }

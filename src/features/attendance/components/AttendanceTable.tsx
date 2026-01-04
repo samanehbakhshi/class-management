@@ -19,16 +19,7 @@ export default function AttendanceTable({
   const [noteValue, setNoteValue] = useState<string>("");
 
   const updateStatusMutation = useUpdateAttendanceStatus();
-  // const handleSaveNote = async (attendanceId: number) => {
-  //   try {
-  //     await updateAttendance(attendanceId, { note: noteValue }); // mutation
-  //     // بعد از ذخیره
-  //     setEditingNoteId(null);
-  //     // می‌توانیم optimistic update انجام دهیم و state attendance را بروز کنیم
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+
 
   const columns: Column<AttendanceRow>[] = [
     { key: "id", label: "ردیف", render: (_, index) => index + 1 },
@@ -65,8 +56,7 @@ export default function AttendanceTable({
     },
   ];
 
-  console.log(attendance);
-  console.log(attendance);
+
   if (!attendance || attendance.length === 0) return <p>موردی یافت نشد.</p>;
 
   return (

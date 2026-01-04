@@ -16,7 +16,7 @@ export default async function AttendancePage({ params }: Props) {
   const sessionId = Number(params.sessionId);
   const initialAttendance = await getAttendanceBySessionId(sessionId);
   const session = await getSessionById(sessionId)
-console.log(session)
+
   return (
     <>
       <SessionHeader session={session} />
