@@ -8,12 +8,15 @@ export default async function page({
 }: {
   searchParams: { page?: string };
 }) {
-  const page = Number((await searchParams.page) ?? 1);
+  const {page: pageNumber} = await searchParams;
+  const page = Number((pageNumber) ?? 1);
   const limit = 10;
 
   const initialData = await getTeachersServer({
     page,
     limit,
+    search: "",
+    filters: {},
   });
 
 

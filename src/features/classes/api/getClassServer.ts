@@ -1,24 +1,25 @@
-import { GetUsersParams } from "@/features/users/types";
+
 import { createSupabaseServerClient } from "../../../../app/lib/supabase/server";
-import { User } from "@supabase/supabase-js";
+import { GetClassesParams } from "../types";
+import { Class } from "@/types/class";
 
 
 
-export async function getTeachersServer({
+export async function getClassServer({
   search = "",
   page = 1,
   limit = 10,
   filters = {},
-}: GetUsersParams): Promise<{ data: User[]; total: number }>  {
+}: GetClassesParams): Promise<{ data: Class[]; total: number }> {
   const supabase = await createSupabaseServerClient();
   const from = (page - 1) * limit;
   const to = from + limit - 1;
 
   const { data, count, error } = await supabase
-    .from("teachers")
+    .from("classes")
     .select("*", { count: "exact" })
-    .range(from,to)
-    // .eq("role", "teacher");
+    .range(from, to);
+  // .eq("role", "teacher");
 
   if (error) throw error;
 

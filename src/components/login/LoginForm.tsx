@@ -3,11 +3,11 @@
 import { useState } from "react";
 import Button from "../Button";
 import { useRouter } from "next/navigation";
-import { supabaseBrowser } from "../../../app/lib/supabase/client";
+import { supabase } from "../../../app/lib/supabase/client";
 
 export default function LoginForm() {
   const router = useRouter();
-  const supabase = supabaseBrowser();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);

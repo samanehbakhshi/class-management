@@ -1,6 +1,6 @@
+import { supabase } from "../../../../app/lib/supabase/client";
 import { GetUsersParams } from "../types";
 import { User } from "@supabase/supabase-js";
-import supabase from "@/lib/services/supabaseClient";
 
 export async function getTeachers({
   search = "",
@@ -11,9 +11,9 @@ export async function getTeachers({
   const from = (page - 1) * limit;
   const to = from + limit - 1;
   let query = supabase
-    .from("users")
+    .from("teachers")
     .select("*", { count: "exact" })
-    .eq("role", "teacher")
+    // .eq("role", "teacher")
     .range(from, to);
 
   // ----S EARCH ----

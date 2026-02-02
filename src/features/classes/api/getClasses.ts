@@ -1,6 +1,7 @@
-import supabase from "@/lib/services/supabaseClient";
+
 import { Class } from "@/types/class";
 import { GetClassesParams } from "../types";
+import { supabase } from "../../../../app/lib/supabase/client";
 
 export async function getClasses({
   search = "",

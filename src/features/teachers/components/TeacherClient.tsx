@@ -15,6 +15,7 @@ import StudentsFilters from "@/features/students/components/StudentsFilter";
 import TeachersTable from "./TeacherTable";
 import TeacherForm from "./TeacherForm";
 import useDebounce from "@/features/students/hooks/useDebounce";
+import { useAuth } from "@/lib/providers/AuthProvider";
 type UserClientProps = {
   initialData: { data: []; total: number };
   initialPage: number;
@@ -35,7 +36,8 @@ export default function TeacherClient({ initialData, initialPage, limit }: UserC
     filters,
     initialData,
   });
-
+const user = useAuth()
+console.log(user, initialData)
 
   // Handlers (search, filters...)
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
