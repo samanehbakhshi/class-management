@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils/cn";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
-import gregorian from "react-date-object/calendars/gregorian";
-import persian_fa from "react-date-object/locales/persian_fa";
-import persian from "react-date-object/calendars/persian";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 type TimeProps = {
   onChange: (value: string) => string;
