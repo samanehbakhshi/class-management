@@ -35,9 +35,9 @@ export default function Time({
     <DatePicker
       inputClass={cn(baseClasses, className)}
       disableDayPicker
-        format="HH:mm:ss"
-    //   format="MM/DD/YYYY HH:mm:ss"
-      plugins={[<TimePicker />]}
+      format="HH:mm:ss"
+      //   format="MM/DD/YYYY HH:mm:ss"
+      plugins={[<TimePicker key={"time-picker"} />]}
       {...props}
       onChange={(dateObject) => {
         if (!dateObject) return;
@@ -45,8 +45,8 @@ export default function Time({
         onChange(timeString); // always string
       }}
       value={dateObjectValue}
-    //   locale={persian_fa}
-    //   calendar={persian}
+      //   locale={persian_fa}
+      //   calendar={persian}
       className="bg-dark"
     />
   );
