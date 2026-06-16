@@ -14,7 +14,7 @@ import useDeleteUser from "@/features/users/hooks/useDeleteUser";
 import UserForm from "@/features/users/components/UserForm";
 
 interface UsersTableProps {
-  users: Student[];
+  users: User[];
   isError: boolean;
   isLoading: boolean;
   setModalOpen: (open: boolean) => void;

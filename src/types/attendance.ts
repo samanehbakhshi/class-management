@@ -17,6 +17,6 @@ export interface AttendanceRow {
   students: {
     first_name: string;
     last_name: string;
-    national_id: string;
+    // national_id: string;
   };
 }

@@ -1,7 +1,11 @@
 import { Session } from "@/types/session";
 import React from "react";
 
-export default function SessionHeader({ session }: Session) {
+interface SessionHeaderProps {
+  session: Session;
+}
+
+export default function SessionHeader({session}: SessionHeaderProps) {
   return (
     <div className="w-full bg-dark p-5 ">
       <div className="flex ">

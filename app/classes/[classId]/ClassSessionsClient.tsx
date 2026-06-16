@@ -21,7 +21,7 @@ export default function ClassSessionsClient({ classId }: Props) {
     <div>
       <h1>جزئیات کلاس</h1>
       <p>کلاس: {classId}</p>
-      <SessionsTable sessions={sessions?.data} />
+      <SessionsTable sessions={sessions?.data ?? []} />
       {/* Pagination */}
       {sessions?.total && (
         <Pagination

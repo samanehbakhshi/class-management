@@ -1,6 +1,6 @@
 import { Student } from "@/types/student";
-import supabase from "../../../lib/services/supabaseClient";
 import { GetStudentsParams } from "../types";
+import { supabase } from "../../../../app/lib/supabase/client";
 
 export async function getStudents({
   search = "",

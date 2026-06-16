@@ -1,12 +1,13 @@
 import DataTable, { Column } from "@/components/table/DataTable";
+import { Session } from "@/types/session";
 import Link from "next/link";
 
 interface SessionsTableProps {
-  sessions: any[];
+  sessions: Session[];
 }
 
 export default function SessionsTable({ sessions }: SessionsTableProps) {
-    const columns: Column<Student>[] = [
+    const columns: Column<Session>[] = [
       { key: "id", label: "ردیف", render: (_, index) => index + 1 },
       { key: "class_id", label: "کلاس" },
       { key: "date", label: "تاریخ" },

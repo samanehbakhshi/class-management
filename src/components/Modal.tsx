@@ -1,6 +1,6 @@
 import React from "react";
 import useClickOutSide from "../hooks/useClickOutSide";
-import { useRef } from "react";
+
 type Props = {
   isOpen: boolean;
   onClose: () => void;

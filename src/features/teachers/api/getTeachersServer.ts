@@ -1,6 +1,7 @@
 import { GetUsersParams } from "@/features/users/types";
 import { createSupabaseServerClient } from "../../../../app/lib/supabase/server";
-import { User } from "@supabase/supabase-js";
+import { User } from "@/types/user";
+
 
 
 
