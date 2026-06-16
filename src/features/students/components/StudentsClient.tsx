@@ -1,0 +1,120 @@
+"use client"
+import Input from '@/components/form/Input';
+import React, { useState } from 'react'
+import StudentsFilters from './StudentsFilter';
+import Button from '@/components/Button';
+import TableContainer from '@/components/table/TableContainer';
+import StudentsTable from './StudentsTable';
+import Pagination from '@/components/pagination/Pagination';
+import Modal from '@/components/Modal';
+import StudentForm from './StudentForm';
+import useDebounce from '../hooks/useDebounce';
+import { useStudents } from '../hooks/useStudents';
+
+const StudentsClient = ({initialData, initialPageLimit}) => {
+  // Local UI States
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(initialPageLimit);
+  const [search, setSearch] = useState("");
+  const [filters, setFilters] = useState(
+    {} as { city?: string; class_id?: number },
+  );
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [editId, setEditId] = useState<null | { id: number }>(null);
+
+  const debouncedSearch = useDebounce(search, 400);
+
+  // React Query Fetch
+  const {
+    data: students,
+    isLoading,
+    isError,
+  } = useStudents({ page, limit, search: debouncedSearch, filters });
+console.log(students)
+  // Handlers (search, filters...)
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    setPage(1); // reset page when searching
+  };
+
+  // HandlersFilters
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilters(e);
+    setPage(1);
+  };
+
+  return (
+    <div>
+      <div className="p-6 space-y-6">
+        {/* Page Title */}
+        <div className="text-gray-7 dark:text-gray-2">دانش آموزان</div>
+
+        {/* Search + Filters + Add Button */}
+        <div className="flex md:flex-row flex-col  items-center justify-between gap-4">
+          {/* Search */}
+          <Input
+            type="text"
+            placeholder="...جستجو"
+            value={search}
+            disabled={isLoading}
+            onChange={handleSearchChange}
+            className="border px-3 py-3   w-64 "
+          />
+
+          {/* Right actions */}
+          <div className="flex items-center gap-3">
+            {/* Filters Component */}
+            <StudentsFilters onChange={handleFilterChange} filters={filters} />
+
+            {/* Add Button */}
+            <Button
+              label="افزودن"
+              className=""
+              variant={"primary"}
+              shape={"rounded"}
+              // TODO: open modal
+              onClick={() => {
+                setModalOpen(true);
+                setEditId(null);
+              }}
+            />
+          </div>
+        </div>
+        <TableContainer className="" title={"دانش آموزان"}>
+          {/* Table Section */}
+          <div>
+            {isLoading && <p>Loading...</p>}
+            {isError && <p>Error loading students</p>}
+
+            <StudentsTable
+              students={students?.data || []}
+              isLoading={isLoading}
+              isError={isError}
+              setEditId={setEditId}
+              setModalOpen={setModalOpen}
+            />
+          </div>
+          {/* Pagination */}
+          {students?.total > 0 && (
+            <Pagination
+              page={page}
+              limit={limit}
+              total={students?.total}
+              onPageChange={(newPage) => setPage(newPage)}
+            />
+          )}
+        </TableContainer>
+        {/* Modal for Add/Edit Student */}
+        <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+          <StudentForm
+            isOpen={isModalOpen}
+            onClose={() => setModalOpen(false)}
+            editId={editId ?? undefined}
+          />
+        </Modal>
+      </div>
+    </div>
+  );
+};
+
+export default StudentsClient;

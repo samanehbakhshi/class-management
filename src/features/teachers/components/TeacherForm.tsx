@@ -4,7 +4,7 @@ import GeneralForm from "@/components/form/GeneralForm";
 import { useCreateUser } from "@/features/users/hooks/useCreateUser";
 import { useUpdateUser } from "@/features/users/hooks/useUpdateUser";
 import { UserSchema } from "@/features/users/validation";
-import useUser from "@/features/users/hooks/useUser";
+import useTeacher from "../hooks/useTeacher";
 
 type Props = {
   onClose: () => void;
@@ -46,7 +46,7 @@ export default function TeacherForm({ onClose, editId }: Props) {
         createItem={createMutation}
         updateItem={updateMutation}
         onClose={onClose}
-        useGetItem={useUser}
+        useGetItem={useTeacher}
         defaultValues={defaultValues}
         schema={UserSchema}
       />

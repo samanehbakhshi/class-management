@@ -60,13 +60,13 @@ export default function GeneralForm<TValues>({
   }, [data, reset]);
 
   const onSubmit = async (values: TValues) => {
-    const {id, ...rest} = values;
-
-    const payload = {...rest, ...extraCreatePayload}
-    editId
-      ? await updateItem.mutateAsync({ id: id, payload: rest })
-      : await createItem.mutateAsync(payload);
-    onClose();
+    console.log(values)
+    // const {id, ...rest} = values;
+    // const payload = {...rest, ...extraCreatePayload}
+    // editId
+    //   ? await updateItem.mutateAsync({ id: id, payload: rest })
+    //   : await createItem.mutateAsync(payload);
+    // onClose();
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

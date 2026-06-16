@@ -18,6 +18,8 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
 
   if (!user) return null;
 
+  console.log(user)
+
   const { data: profile, error } = await supabase
     .from("users") // یا "profiles" اگر جدول شما اینه
     .select("id, role")

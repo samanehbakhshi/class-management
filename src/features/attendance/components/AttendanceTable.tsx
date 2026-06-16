@@ -10,16 +10,23 @@ import EditableCell from "@/components/table/EditableCell";
 
 interface AttendanceTableProps {
   attendance: AttendanceRow[];
+  isError: boolean;
+  isLoading: boolean;
+  setModalOpen: (open: boolean) => void;
+  setEditId: (studentId: number | null) => void;
 }
 
 export default function AttendanceTable({
   attendance,
+  isError,
+  isLoading,
+  setModalOpen,
+  setEditId,
 }: AttendanceTableProps) {
   const [editingNoteId, setEditingNoteId] = useState<number | null>(null);
   const [noteValue, setNoteValue] = useState<string>("");
 
   const updateStatusMutation = useUpdateAttendanceStatus();
-
 
   const columns: Column<AttendanceRow>[] = [
     { key: "id", label: "ردیف", render: (_, index) => index + 1 },
@@ -34,11 +41,11 @@ export default function AttendanceTable({
       label: "وضعیت حضور",
       render: (row) => <AttendanceStatusBadge status={row.status} />,
     },
-    {
-      key: "national_id",
-      label: "کد ملی",
-      render: (row) => row.students.national_id,
-    },
+    // {
+    //   key: "national_id",
+    //   label: "کد ملی",
+    //   render: (row) => row.students.national_id,
+    // },
     {
       key: "note",
       label: "یادداشت",
@@ -46,7 +53,9 @@ export default function AttendanceTable({
         <EditableCell
           rowId={row.id}
           value={row.note || ""}
-          onUpdate={(id, newNote) => updateStatusMutation.mutate({id: id, note: newNote})}
+          onUpdate={(id, newNote) =>
+            updateStatusMutation.mutate({ id: id, note: newNote })
+          }
           renderDisplay={(val) => val || "-"}
           renderEdit={(val, setVal) => (
             <textarea value={val} onChange={(e) => setVal(e.target.value)} />
@@ -55,7 +64,6 @@ export default function AttendanceTable({
       ),
     },
   ];
-
 
   if (!attendance || attendance.length === 0) return <p>موردی یافت نشد.</p>;
 

@@ -4,23 +4,28 @@ import { Student } from "@/types/student";
 import { getStudents } from "@/features/students/api/getStudents";
 
 export default function HomePage() {
-  const [students, setStudents] = useState<Student[]>([]);
-  useEffect(() => {
-    const fetchStudents = async () => {
-      const data = await getStudents();
-      setStudents(data as Student[]);
-    };
-    fetchStudents();
-  }, []);
+  // const [students, setStudents] = useState<Student[]>([]);
+  // useEffect(() => {
+  //   const fetchStudents = async () => {
+  //     const data = await getStudents();
+  //     setStudents(data as Student[]);
+  //   };
+  //   fetchStudents();
+  // }, []);
   return (
     <div>
+      {/* <h1>mai page</h1>
+      <h1>mai page</h1>
+
+      <h1>mai page</h1>
+
       <ul>
         {students?.map((student) => (
           <li key={student.id}>
             {student.first_name} {student.last_name}
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }

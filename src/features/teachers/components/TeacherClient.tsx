@@ -16,8 +16,9 @@ import TeachersTable from "./TeacherTable";
 import TeacherForm from "./TeacherForm";
 import useDebounce from "@/features/students/hooks/useDebounce";
 import { useAuth } from "@/lib/providers/AuthProvider";
+import { User } from "@/types/user";
 type UserClientProps = {
-  initialData: { data: []; total: number };
+  initialData: { data: User[]; total: number };
   initialPage: number;
   limit: number;
 };
